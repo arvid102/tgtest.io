@@ -5,8 +5,15 @@ body {
 }
 
 header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 10px;
     background-color: #f8f8f8;
+}
+
+.logo {
+    height: 40px;  /* Adjust as needed */
 }
 
 .menu-button {
@@ -23,7 +30,7 @@ header {
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #ffffff;
+    background-color: #111;  /* Solid background color */
     overflow-x: hidden;
     transition: 0.5s;
 }
