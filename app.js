@@ -16,8 +16,8 @@ document.getElementById("menuButton").addEventListener("click", openNav);
 
 // Fetch products from an API or use static data
 const products = [
-    { id: 1, name: "Product 1", price: 10.99, image: "https://cdn.engelbert-strauss.de/assets/pdp/images/Original/product/1.Release.3100031/e_s_T-Shirt_cotton-8055-3-637868075235549114.png" },
-    { id: 2, name: "Product 2", price: 15.99, image: "https://cdn.engelbert-strauss.de/assets/pdp/images/Original/product/1.Release.3100031/e_s_T-Shirt_cotton-8055-3-637868075235549114.png" },
+    { id: 1, name: "Product 1", price: 10.99, image: "4.png" },
+    { id: 2, name: "Product 2", price: 15.99, image: "14.png" },
     // Add more products...
 ];
 
