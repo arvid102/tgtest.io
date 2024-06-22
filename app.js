@@ -2,6 +2,18 @@ let tg = window.Telegram.WebApp;
 
 tg.expand();
 
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("app").style.marginLeft = "250px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("app").style.marginLeft = "0";
+}
+
+document.getElementById("menuButton").addEventListener("click", openNav);
+
 // Fetch products from an API or use static data
 const products = [
     { id: 1, name: "Product 1", price: 10.99, image: "https://arvid102.github.io/redstore.io/1.png" },
