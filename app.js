@@ -77,26 +77,26 @@ function updateCartSummary() {
     }
 }
 
-function renderCart() {
-    const cartDiv = document.getElementById('cart');
-    cartDiv.innerHTML = cart.map(item => `
-        <div class="cart-item">
-            <span>${item.name}</span>
-            <span>$${item.price.toFixed(2)}</span>
-        </div>
-    `).join('');
+// function renderCart() {
+//     const cartDiv = document.getElementById('cart');
+//     cartDiv.innerHTML = cart.map(item => `
+//         <div class="cart-item">
+//             <span>${item.name}</span>
+//             <span>$${item.price.toFixed(2)}</span>
+//         </div>
+//     `).join('');
     
-    const total = cart.reduce((sum, item) => sum + item.price, 0);
-    cartDiv.innerHTML += `<div class="total">Total: $${total.toFixed(2)}</div>`;
+//     const total = cart.reduce((sum, item) => sum + item.price, 0);
+//     cartDiv.innerHTML += `<div class="total">Total: $${total.toFixed(2)}</div>`;
     
-    // Enable the Main Button when cart is not empty
-    if (cart.length > 0) {
-        tg.MainButton.text = "Place Order";
-        tg.MainButton.show();
-    } else {
-        tg.MainButton.hide();
-    }
-}
+//     // Enable the Main Button when cart is not empty
+//     if (cart.length > 0) {
+//         tg.MainButton.text = "Place Order";
+//         tg.MainButton.show();
+//     } else {
+//         tg.MainButton.hide();
+//     }
+// }
 
 tg.MainButton.onClick(() => {
     tg.sendData(JSON.stringify(cart));
