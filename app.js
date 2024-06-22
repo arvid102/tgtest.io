@@ -4,8 +4,8 @@ tg.expand();
 
 // Fetch products from an API or use static data
 const products = [
-    { id: 1, name: "Product 1", price: 10.99, image: "product1.jpg" },
-    { id: 2, name: "Product 2", price: 15.99, image: "product2.jpg" },
+    { id: 1, name: "Product 1", price: 10.99, image: "https://arvid102.github.io/redstore.io/1.png" },
+    { id: 2, name: "Product 2", price: 15.99, image: "https://arvid102.github.io/redstore.io/1.png" },
     // Add more products...
 ];
 
