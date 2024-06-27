@@ -3,14 +3,20 @@ let tg = window.Telegram.WebApp;
 tg.expand();
 
 function openNav() {
-    document.getElementById("sideNav").style.width = "100%";
+    document.getElementById("mySidenav").style.width = "250px";
 }
 
 function closeNav() {
-    document.getElementById("sideNav").style.width = "0";
+    document.getElementById("mySidenav").style.width = "0";
 }
 
-document.getElementById("menuButton").addEventListener("click", openNav);
+// This function should be called when the DOM is fully loaded
+function initializeNavigation() {
+    document.getElementById("menuButton").addEventListener("click", openNav);
+}
+
+// Call initializeNavigation when the DOM is loaded
+document.addEventListener("DOMContentLoaded", initializeNavigation);
 
 // Fetch products from an API or use static data
 const products = [
