@@ -15,20 +15,41 @@ document.getElementById("menuButton").addEventListener("click", openNav);
 
 // Fetch products from an API or use static data
 const products = [
-    { id: 1, name: "Cyberpunk Rebecca T-Shirt", price: 10.99, image: "images/cyberbunk_rebecca.png" },
-    { id: 2, name: "I Love BMW T-Shirt", price: 15.99, image: "images/love_bmw1.png" },
-    { id: 3, name: "Gojo T-Shirt", price: 12.99, image: "images/gojo_satoru_nike.png" },
-    { id: 4, name: "Just Drift It T-Shirt", price: 18.99, image: "images/just_drift_it.png" },
-    { id: 5, name: "Solo Leveling T-Shirt", price: 25.99, image: "images/solo_lvl_0.png" },
-    { id: 6, name: "Himiko Toga T-Shirt", price: 5.99, image: "images/himiko_toga.png" },
-    // Add more products...
+    { id: 1, name: "Cyberpunk Rebecca T-Shirt", price: 10.99, image: "images/cyberbunk_rebecca.png", category: "t-shirt" },
+    { id: 2, name: "I Love BMW T-Shirt", price: 15.99, image: "images/love_bmw1.png", category: "t-shirt" },
+    { id: 3, name: "Gojo T-Shirt", price: 12.99, image: "images/gojo_satoru_nike.png", category: "t-shirt" },
+    { id: 4, name: "Just Drift It T-Shirt", price: 18.99, image: "images/just_drift_it.png", category: "t-shirt" },
+    { id: 5, name: "Solo Leveling T-Shirt", price: 25.99, image: "images/solo_lvl_0.png", category: "t-shirt" },
+    { id: 6, name: "Himiko Toga T-Shirt", price: 5.99, image: "images/himiko_toga.png", category: "t-shirt" },
+    // Add more products with categories...
 ];
 
 const cart = [];
 
-function renderProducts() {
+function filterProducts() {
+    const searchTerm = document.getElementById('search').value.toLowerCase();
+    const category = document.getElementById('category').value;
+    const sortBy = document.getElementById('sort').value;
+
+    let filteredProducts = products.filter(product => 
+        product.name.toLowerCase().includes(searchTerm) &&
+        (category === '' || product.category === category)
+    );
+
+    if (sortBy === 'name') {
+        filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sortBy === 'price-asc') {
+        filteredProducts.sort((a, b) => a.price - b.price);
+    } else if (sortBy === 'price-desc') {
+        filteredProducts.sort((a, b) => b.price - a.price);
+    }
+
+    renderProducts(filteredProducts);
+}
+
+function renderProducts(productsToRender) {
     const productsDiv = document.getElementById('products');
-    productsDiv.innerHTML = products.map(product => `
+    productsDiv.innerHTML = productsToRender.map(product => `
         <div class="product">
             <img src="${product.image}" alt="${product.name}">
             <h3>${product.name}</h3>
