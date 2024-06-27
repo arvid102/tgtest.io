@@ -3,14 +3,13 @@ let tg = window.Telegram.WebApp;
 tg.expand();
 
 function openNav() {
-    document.getElementById("mySidenav").style.width = "100%";
+    document.getElementById("sideNav").style.width = "250px";
 }
 
 function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("sideNav").style.width = "0";
 }
 
-// Add event listener to menu button
 document.getElementById("menuButton").addEventListener("click", openNav);
 
 // Fetch products from an API or use static data
