@@ -32,7 +32,7 @@ function renderProducts() {
         <div class="product">
             <img src="${product.image}" alt="${product.name}">
             <h3>${product.name}</h3>
-            <p>$${product.price.toFixed(2)}</p>
+            <p>€${product.price.toFixed(2)}</p>
             <button onclick="addToCart(${product.id})">Add to Cart</button>
         </div>
     `).join('');
@@ -66,10 +66,10 @@ function updateCart() {
         ${Object.values(cartItems).map(item => `
             <div class="cart-item">
                 <span>${item.name} x${item.quantity}</span>
-                <span>$${(item.price * item.quantity).toFixed(2)}</span>
+                <span>€${(item.price * item.quantity).toFixed(2)}</span>
             </div>
         `).join('')}
-        <div class="cart-total">Total: $${total.toFixed(2)}</div>
+        <div class="cart-total">Total: €${total.toFixed(2)}</div>
     `;
 
     // Enable the Main Button when cart is not empty
