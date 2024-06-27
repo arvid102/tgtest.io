@@ -114,5 +114,5 @@ filterProducts();
 document.getElementById('search').addEventListener('input', filterProducts);
 document.getElementById('category').addEventListener('change', filterProducts);
 document.getElementById('sort').addEventListener('change', filterProducts);
-renderProducts();
+// renderProducts();
 renderCart();
