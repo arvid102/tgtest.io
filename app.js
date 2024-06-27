@@ -3,7 +3,7 @@ let tg = window.Telegram.WebApp;
 tg.expand();
 
 function openNav() {
-    document.getElementById("sideNav").style.width = "250px";
+    document.getElementById("sideNav").style.width = "100%";
 }
 
 function closeNav() {
