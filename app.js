@@ -15,7 +15,7 @@ document.getElementById("menuButton").addEventListener("click", openNav);
 
 // Fetch products from an API or use static data
 const products = [
-    { id: 1, name: "Product 1", price: 10.99, image: "love_bmw1.png" },
+    { id: 1, name: "Product 1", price: 10.99, image: "images/love_bmw1.png" },
     { id: 2, name: "Product 2", price: 15.99, image: "14.png" },
     { id: 3, name: "Product 3", price: 12.99, image: "14.png" },
     { id: 4, name: "Product 4", price: 18.99, image: "14.png" },
