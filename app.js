@@ -10,12 +10,13 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
 
-// This function should be called when the DOM is fully loaded
 function initializeNavigation() {
-    document.getElementById("menuButton").addEventListener("click", openNav);
+    const menuButton = document.getElementById("menuButton");
+    if (menuButton) {
+        menuButton.addEventListener("click", openNav);
+    }
 }
 
-// Call initializeNavigation when the DOM is loaded
 document.addEventListener("DOMContentLoaded", initializeNavigation);
 
 // Fetch products from an API or use static data
