@@ -142,6 +142,24 @@ header {
     width: 100%;
 }
 
+#cart {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+/*     margin-bottom: 5px; */
+}
+
+.cart-total {
+    font-weight: bold;
+    text-align: right;
+    margin-top: 10px;
+}
+
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
