@@ -36,16 +36,13 @@ header {
     margin-bottom: 15px;
 }
 
-.search-container {
-    margin-bottom: 10px;
-}
-
 #search {
-    width: 100%;
+    width: calc(100% - 22px);
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ddd;
     border-radius: 4px;
+    margin-bottom: 10px;
 }
 
 .filter-container {
@@ -61,6 +58,12 @@ header {
     border: 1px solid #ddd;
     border-radius: 4px;
     background-color: white;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L7 7L13 1" stroke="%23333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
 }
 
 #products {
@@ -106,10 +109,6 @@ header {
 }
 
 @media screen and (max-width: 600px) {
-    .filter-container {
-        flex-direction: row;
-    }
-
     #category, #sort {
         font-size: 14px;
     }
