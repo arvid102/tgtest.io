@@ -21,7 +21,7 @@ const products = [
     { id: 4, name: "Just Drift It T-Shirt", price: 18.99, image: "images/just_drift_it.png", category: "t-shirt" },
     { id: 5, name: "Solo Leveling T-Shirt", price: 25.99, image: "images/solo_lvl_0.png", category: "t-shirt" },
     { id: 6, name: "Himiko Toga T-Shirt", price: 5.99, image: "images/himiko_toga.png", category: "t-shirt" },
-    // Add more products with categories...
+    // Add more products...
 ];
 
 const cart = [];
@@ -107,12 +107,9 @@ tg.MainButton.onClick(() => {
 });
 
 // Initial render
-
 filterProducts();
 
 // Add event listeners
 document.getElementById('search').addEventListener('input', filterProducts);
 document.getElementById('category').addEventListener('change', filterProducts);
 document.getElementById('sort').addEventListener('change', filterProducts);
-renderProducts();
-renderCart();
