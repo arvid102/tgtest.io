@@ -36,28 +36,34 @@ header {
     background-color: #fff;
     overflow-x: hidden;
     transition: 0.5s;
-    padding-top: 60px;
+}
+
+.sidenav-content {
+    position: relative;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
 }
 
 .sidenav a {
-    padding: 8px 8px 8px 32px;
+    padding: 8px;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 36px;
     color: #818181;
     display: block;
     transition: 0.3s;
 }
 
-.sidenav a:hover {
-    color: #111;
+.sidenav a:hover, .sidenav a:focus {
+    color: #f1f1f1;
 }
 
 .sidenav .closebtn {
     position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
 }
 
 #app {
