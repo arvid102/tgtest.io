@@ -19,8 +19,8 @@ const products = [
     { id: 2, name: "I Love BMW T-Shirt", price: 15.99, image: "images/love_bmw1.png" },
     { id: 3, name: "Gojo T-Shirt", price: 12.99, image: "images/gojo_satoru_nike.png" },
     { id: 4, name: "Just Drift It T-Shirt", price: 18.99, image: "images/just_drift_it.png" },
-    { id: 5, name: "Product 5", price: 25.99, image: "14.png" },
-    { id: 6, name: "Product 6", price: 5.99, image: "14.png" },
+    { id: 5, name: "Katana and Mask White T-Shirt", price: 25.99, image: "images/white_katana_mask.png" },
+    { id: 6, name: "Himiko Toga T-Shirt", price: 5.99, image: "images/himiko_toga.png" },
     // Add more products...
 ];
 
