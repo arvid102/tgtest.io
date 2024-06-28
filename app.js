@@ -27,7 +27,7 @@ const products = [
     { id: 4, name: "Just Drift It T-Shirt", price: 18.99, image: "images/just_drift_it.png", category: "t-shirt" },
     { id: 5, name: "Solo Leveling T-Shirt", price: 25.99, image: "images/solo_lvl_0.png", category: "t-shirt" },
     { id: 6, name: "Himiko Toga T-Shirt", price: 5.99, image: "images/himiko_toga.png", category: "t-shirt" },
-    { id: 7, name: "GTR Godzila T-Shirt", price: 5.99, image: "images/0.png", category: "t-shirt" },
+    { id: 7, name: "GTR Godzila T-Shirt", price: 15.99, image: "images/unisex-basic-softstyle-t-shirt-black-front-66140a7d886f6.png", category: "t-shirt" },
     { id: 8, name: "Nezuko Lightbox", price: 25.99, image: "images/Visual-Night-Lights-LED-Demon-Slayer.jpg", category: "decor" },
     { id: 9, name: "Ghoul Lightbox", price: 24.99, image: "images/Anime-Lightbox-Tokyo-Ghoul2.jpg", category: "decor" },
     { id: 10, name: "Toga T-Shirt", price: 5.99, image: "images/himiko_toga.png", category: "t-shirt" },
