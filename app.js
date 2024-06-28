@@ -32,6 +32,7 @@ const products = [
     { id: 9, name: "Ghoul Lightbox", price: 24.99, image: "images/Anime-Lightbox-Tokyo-Ghoul2.jpg", category: "decor" },
     { id: 10, name: "Toga T-Shirt", price: 5.99, image: "images/himiko_toga.png", category: "t-shirt" },
     { id: 11, name: "imiko Toga T-Shirt", price: 5.99, image: "images/himiko_toga.png", category: "t-shirt" },
+    { id: 12, name: "Display Frame Case", price: 5.99, image: "images/Hot-Sale-1-Set-70-70mm-Black-3D-Floating-Jewelry-Coin-Display-Frame-Holder-Box-Case.jpg_.webp", category: "decor" },
     // Add more products...
 ];
 
