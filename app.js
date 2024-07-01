@@ -63,22 +63,26 @@ let isGridView = true;
 
 function toggleView() {
     isGridView = !isGridView;
-    const gridIcon = document.querySelector('.grid-icon');
-    const listIcon = document.querySelector('.list-icon');
+    const listButton = document.querySelector('.list-button');
+    const gridButton = document.querySelector('.grid-button');
     
     if (isGridView) {
-        gridIcon.classList.add('active');
-        listIcon.classList.remove('active');
+        gridButton.classList.add('active');
+        listButton.classList.remove('active');
     } else {
-        gridIcon.classList.remove('active');
-        listIcon.classList.add('active');
+        listButton.classList.add('active');
+        gridButton.classList.remove('active');
     }
     
     filterProducts();
 }
 
 // Add this at the end of your existing JavaScript
-document.getElementById('gridToggle').addEventListener('click', toggleView);
+document.getElementById('gridToggle').addEventListener('click', (event) => {
+    if (event.target.closest('.view-button')) {
+        toggleView();
+    }
+});
 
 function renderProducts(productsToRender) {
     const productsDiv = document.getElementById('products');
