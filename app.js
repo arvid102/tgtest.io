@@ -63,8 +63,22 @@ let isGridView = true;
 
 function toggleView() {
     isGridView = !isGridView;
+    const gridIcon = document.querySelector('.grid-icon');
+    const listIcon = document.querySelector('.list-icon');
+    
+    if (isGridView) {
+        gridIcon.classList.add('active');
+        listIcon.classList.remove('active');
+    } else {
+        gridIcon.classList.remove('active');
+        listIcon.classList.add('active');
+    }
+    
     filterProducts();
 }
+
+// Add this at the end of your existing JavaScript
+document.getElementById('gridToggle').addEventListener('click', toggleView);
 
 function renderProducts(productsToRender) {
     const productsDiv = document.getElementById('products');
