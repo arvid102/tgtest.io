@@ -169,13 +169,7 @@ header {
     margin-top: 10px;
 }
 
-.grid-view {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-#gridToggle {
+#viewToggle {
     display: flex;
     margin-bottom: 15px;
 }
@@ -211,10 +205,30 @@ header {
     font-size: 18px;
 }
 
-.list-view {
+#products.list-view {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
+}
+
+#products.grid-view {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+#products.grid-view .product {
+    flex: 0 1 calc(33.333% - 10px);
+}
+
+#products.list-view .product {
+    display: flex;
+    align-items: center;
+}
+
+#products.list-view .product img {
+    width: 100px;
+    margin-right: 20px;
 }
 
 @media screen and (max-height: 450px) {
