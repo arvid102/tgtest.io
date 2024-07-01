@@ -100,10 +100,19 @@ header {
     background-color: white;
 }
 
-#products {
+/* #products {
     display: flex;
     flex-direction: column;
     gap: 15px;
+}
+ */
+#products {
+    width: 100%;
+}
+
+.product img {
+    max-width: 100%;
+    height: auto;
 }
 
 .product {
@@ -114,11 +123,11 @@ header {
     text-align: center;
 }
 
-.product img {
+/* .product img {
     max-width: 100%;
     height: auto;
     border-radius: 4px;
-}
+} */
 
 .product h3 {
     margin: 10px 0;
