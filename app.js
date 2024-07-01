@@ -19,14 +19,6 @@ function initializeNavigation() {
 
 document.addEventListener("DOMContentLoaded", initializeNavigation);
 
-const gridToggle = document.getElementById('gridToggle');
-const productsDiv = document.getElementById('products');
-
-gridToggle.addEventListener('click', () => {
-    productsDiv.classList.toggle('grid-view');
-    productsDiv.classList.toggle('list-view');
-});
-
 // Fetch products from an API or use static data
 const products = [
     { id: 1, name: "Cyberpunk Rebecca T-Shirt", price: 10.99, image: "images/cyberbunk_rebecca.png", category: "t-shirt" },
@@ -67,17 +59,46 @@ function filterProducts() {
     renderProducts(filteredProducts);
 }
 
+let isGridView = true;
+
+function toggleView() {
+    isGridView = !isGridView;
+    filterProducts();
+}
+
 function renderProducts(productsToRender) {
     const productsDiv = document.getElementById('products');
-    productsDiv.innerHTML = productsToRender.map(product => `
-        <div class="product">
-            <img src="${product.image}" alt="${product.name}">
-            <h3>${product.name}</h3>
-            <p>€${product.price.toFixed(2)}</p>
-            <button onclick="addToCart(${product.id})">Add to Cart</button>
-        </div>
-    `).join('');
+    if (isGridView) {
+        productsDiv.style.display = 'flex';
+        productsDiv.style.flexWrap = 'wrap';
+        productsDiv.style.gap = '15px';
+        productsDiv.innerHTML = productsToRender.map(product => `
+            <div class="product" style="flex: 0 1 calc(33.333% - 10px);">
+                <img src="${product.image}" alt="${product.name}">
+                <h3>${product.name}</h3>
+                <p>€${product.price.toFixed(2)}</p>
+                <button onclick="addToCart(${product.id})">Add to Cart</button>
+            </div>
+        `).join('');
+    } else {
+        productsDiv.style.display = 'flex';
+        productsDiv.style.flexDirection = 'column';
+        productsDiv.style.gap = '15px';
+        productsDiv.innerHTML = productsToRender.map(product => `
+            <div class="product" style="display: flex; align-items: center;">
+                <img src="${product.image}" alt="${product.name}" style="width: 100px; margin-right: 20px;">
+                <div>
+                    <h3>${product.name}</h3>
+                    <p>€${product.price.toFixed(2)}</p>
+                    <button onclick="addToCart(${product.id})">Add to Cart</button>
+                </div>
+            </div>
+        `).join('');
+    }
 }
+
+// Add this at the end of your existing JavaScript
+document.getElementById('gridToggle').addEventListener('click', toggleView);
 
 function addToCart(productId) {
     const product = products.find(p => p.id === productId);
