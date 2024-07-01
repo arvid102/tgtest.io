@@ -65,58 +65,43 @@ function toggleView() {
     isGridView = !isGridView;
     const listButton = document.querySelector('.list-button');
     const gridButton = document.querySelector('.grid-button');
+    const productsDiv = document.getElementById('products');
     
     if (isGridView) {
         gridButton.classList.add('active');
         listButton.classList.remove('active');
+        productsDiv.classList.remove('list-view');
+        productsDiv.classList.add('grid-view');
     } else {
         listButton.classList.add('active');
         gridButton.classList.remove('active');
+        productsDiv.classList.remove('grid-view');
+        productsDiv.classList.add('list-view');
     }
     
     filterProducts();
 }
 
-// Add this at the end of your existing JavaScript
-document.getElementById('gridToggle').addEventListener('click', (event) => {
-    if (event.target.closest('.view-button')) {
-        toggleView();
-    }
-});
-
 function renderProducts(productsToRender) {
     const productsDiv = document.getElementById('products');
-    if (isGridView) {
-        productsDiv.style.display = 'flex';
-        productsDiv.style.flexWrap = 'wrap';
-        productsDiv.style.gap = '15px';
-        productsDiv.innerHTML = productsToRender.map(product => `
-            <div class="product" style="flex: 0 1 calc(33.333% - 10px);">
-                <img src="${product.image}" alt="${product.name}">
+    productsDiv.innerHTML = productsToRender.map(product => `
+        <div class="product">
+            <img src="${product.image}" alt="${product.name}">
+            <div class="product-info">
                 <h3>${product.name}</h3>
                 <p>€${product.price.toFixed(2)}</p>
                 <button onclick="addToCart(${product.id})">Add to Cart</button>
             </div>
-        `).join('');
-    } else {
-        productsDiv.style.display = 'flex';
-        productsDiv.style.flexDirection = 'column';
-        productsDiv.style.gap = '15px';
-        productsDiv.innerHTML = productsToRender.map(product => `
-            <div class="product" style="display: flex; align-items: center;">
-                <img src="${product.image}" alt="${product.name}" style="width: 100px; margin-right: 20px;">
-                <div>
-                    <h3>${product.name}</h3>
-                    <p>€${product.price.toFixed(2)}</p>
-                    <button onclick="addToCart(${product.id})">Add to Cart</button>
-                </div>
-            </div>
-        `).join('');
-    }
+        </div>
+    `).join('');
 }
 
-// Add this at the end of your existing JavaScript
-document.getElementById('gridToggle').addEventListener('click', toggleView);
+// Add these lines at the end of your existing JavaScript
+document.querySelector('.list-button').addEventListener('click', toggleView);
+document.querySelector('.grid-button').addEventListener('click', toggleView);
+
+// Initial setup
+document.getElementById('products').classList.add('grid-view');
 
 function addToCart(productId) {
     const product = products.find(p => p.id === productId);
