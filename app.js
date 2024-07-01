@@ -19,6 +19,14 @@ function initializeNavigation() {
 
 document.addEventListener("DOMContentLoaded", initializeNavigation);
 
+const gridToggle = document.getElementById('gridToggle');
+const productsDiv = document.getElementById('products');
+
+gridToggle.addEventListener('click', () => {
+    productsDiv.classList.toggle('grid-view');
+    productsDiv.classList.toggle('list-view');
+});
+
 // Fetch products from an API or use static data
 const products = [
     { id: 1, name: "Cyberpunk Rebecca T-Shirt", price: 10.99, image: "images/cyberbunk_rebecca.png", category: "t-shirt" },
