@@ -175,6 +175,21 @@ header {
     gap: 20px;
 }
 
+#gridToggle {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.icon {
+    font-size: 24px;
+    padding: 5px;
+    color: #333;
+}
+
+.icon.active {
+    color: #E53935;
+}
+
 .list-view {
     display: flex;
     flex-direction: column;
