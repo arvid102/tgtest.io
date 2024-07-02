@@ -28,7 +28,7 @@ const products = [
         image: "images/cyberbunk_rebecca.png", 
         category: "t-shirt",
         description: "Show your love for Cyberpunk with this stylish Rebecca t-shirt.",
-        additionalImages: ["images/cyberbunk_rebecca2.png", "images/black_back.png"],
+        additionalImages: ["images/cyberpunk_rebecca2.png", "images/black_back.png"],
         colors: ["White", "Blue", "Black"],
         sizes: ["S", "M", "L", "XL"]
     },
