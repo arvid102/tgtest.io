@@ -28,7 +28,7 @@ const products = [
         image: "images/cyberbunk_rebecca.png", 
         category: "t-shirt",
         description: "Show your love for Cyberpunk with this stylish Rebecca t-shirt.",
-        additionalImages: ["images/cyberbunk_rebecca_2.png", "images/cyberbunk_rebecca_3.png"]
+        additionalImages: ["images/cyberpunk_rebecca2.png", "images/black_back.png"]
     },
     { id: 2, name: "I Love BMW T-Shirt", price: 15.99, image: "images/love_bmw1.png", category: "t-shirt" },
     { id: 3, name: "Gojo T-Shirt", price: 12.99, image: "images/gojo_satoru_nike.png", category: "t-shirt" },
