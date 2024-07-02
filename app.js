@@ -178,11 +178,17 @@ function showProductDetails(productId) {
                 </div>
             </div>
             
-            <button onclick="addToCartWithOptions(${product.id})">Add to Cart</button>
+            <button onclick="addToCartFromModal(${product.id})">Add to Cart</button>
         </div>
     `;
 
     modal.style.display = "block";
+}
+
+function addToCartFromModal(productId) {
+    const color = document.getElementById('color-select').value;
+    const size = document.getElementById('size-select').value;
+    addToCart(productId, color, size);
 }
 
 function addToCartWithOptions(productId) {
@@ -224,10 +230,20 @@ document.querySelector('.grid-button').addEventListener('click', toggleView);
 // Initial setup
 document.getElementById('products').classList.add('grid-view');
 
-function addToCart(productId) {
+function addToCart(productId, color, size) {
     const product = products.find(p => p.id === productId);
-    cart.push(product);
+    const cartItem = {
+        ...product,
+        color: color,
+        size: size,
+        quantity: 1
+    };
+    
+    cart.push(cartItem);
     updateCart();
+    
+    // Close the modal after adding to cart
+    document.getElementById('productModal').style.display = "none";
 }
 
 function updateCart() {
@@ -238,10 +254,11 @@ function updateCart() {
     }
 
     const cartItems = cart.reduce((acc, item) => {
-        if (acc[item.id]) {
-            acc[item.id].quantity += 1;
+        const key = `${item.id}-${item.color}-${item.size}`;
+        if (acc[key]) {
+            acc[key].quantity += 1;
         } else {
-            acc[item.id] = { ...item, quantity: 1 };
+            acc[key] = { ...item, quantity: 1 };
         }
         return acc;
     }, {});
@@ -251,7 +268,7 @@ function updateCart() {
     cartDiv.innerHTML = `
         ${Object.values(cartItems).map(item => `
             <div class="cart-item">
-                <span>${item.name} x${item.quantity}</span>
+                <span>${item.name} (${item.color}, ${item.size}) x${item.quantity}</span>
                 <span>€${(item.price * item.quantity).toFixed(2)}</span>
             </div>
         `).join('')}
