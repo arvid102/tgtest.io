@@ -187,8 +187,9 @@ function showProductDetails(productId) {
 
     modal.style.display = "block";
 
-    // Close modal when clicking on <span> (x)
-    document.querySelector('.close').onclick = function() {
+    // Attach event listener to close button after content is inserted
+    const closeButton = modalContent.querySelector('.close');
+    closeButton.onclick = function() {
         modal.style.display = "none";
     }
 
