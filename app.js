@@ -33,6 +33,16 @@ const products = [
     { id: 10, name: "Toga T-Shirt", price: 5.99, image: "images/himiko_toga.png", category: "t-shirt" },
     { id: 11, name: "imiko Toga T-Shirt", price: 5.99, image: "images/himiko_toga.png", category: "t-shirt" },
     { id: 12, name: "Display Frame Case", price: 5.99, image: "images/Hot-Sale-1-Set-70-70mm-Black-3D-Floating-Jewelry-Coin-Display-Frame-Holder-Box-Case.jpg_.webp", category: "decor" },
+    { id: 13, name: "Toga T-Shirt", price: 10.99, image: "images/himiko_toga.png", category: "t-shirt" },
+    { id: 14, name: "MHA T-Shirt", price: 9.99, image: "images/himiko_toga.png", category: "t-shirt" },
+    { id: 15, name: "MHA Toga T-Shirt", price: 5.99, image: "images/himiko_toga.png", category: "t-shirt" },
+    { id: 16, name: "imi Toga T-Shirt", price: 8.99, image: "images/himiko_toga.png", category: "t-shirt" },
+    { id: 17, name: "ko Toga T-Shirt", price: 12.99, image: "images/himiko_toga.png", category: "t-shirt" },
+    { id: 18, name: "H Toga T-Shirt", price: 9.99, image: "images/himiko_toga.png", category: "t-shirt" },
+    { id: 19, name: "My Toga T-Shirt", price: 6.99, image: "images/himiko_toga.png", category: "t-shirt" },
+    { id: 20, name: "My hero Toga T-Shirt", price: 5.99, image: "images/himiko_toga.png", category: "t-shirt" },
+    { id: 21, name: "White Toga T-Shirt", price: 10.99, image: "images/himiko_toga.png", category: "t-shirt" },
+    { id: 22, name: "mha Toga T-Shirt", price: 17.99, image: "images/himiko_toga.png", category: "t-shirt" },
     // Add more products...
 ];
 
