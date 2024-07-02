@@ -32,8 +32,28 @@ const products = [
         colors: ["White", "Blue", "Black"],
         sizes: ["S", "M", "L", "XL"]
     },
-    { id: 2, name: "I Love BMW T-Shirt", price: 15.99, image: "images/love_bmw1.png", category: "t-shirt" },
-    { id: 3, name: "Gojo T-Shirt", price: 12.99, image: "images/gojo_satoru_nike.png", category: "t-shirt" },
+    {
+        id: 2, 
+        name: "I Love BMW T-Shirt", 
+        price: 15.99, 
+        image: "images/love_bmw1.png", 
+        category: "t-shirt",
+        description: "t-shirt.",
+        additionalImages: ["images/black_back.png"],
+        colors: ["White", "Blue", "Black"],
+        sizes: ["S", "M", "L", "XL"]
+    },
+    { 
+        id: 3, 
+        name: "Gojo T-Shirt", 
+        price: 12.99, 
+        image: "images/gojo_satoru_nike.png", 
+        category: "t-shirt",
+        description: "t-shirt.",
+        additionalImages: ["images/black_back.png"],
+        colors: ["White", "Blue", "Black"],
+        sizes: ["S", "M", "L", "XL"]
+    },
     { id: 4, name: "Just Drift It T-Shirt", price: 18.99, image: "images/just_drift_it.png", category: "t-shirt" },
     { id: 5, name: "Solo Leveling T-Shirt", price: 25.99, image: "images/solo_lvl_0.png", category: "t-shirt" },
     { id: 6, name: "Himiko Toga T-Shirt", price: 5.99, image: "images/himiko_toga.png", category: "t-shirt" },
