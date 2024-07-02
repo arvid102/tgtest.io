@@ -120,18 +120,30 @@ function showProductDetails(productId) {
     const modalContent = document.getElementById('modalProductDetails');
 
     modalContent.innerHTML = `
-        <h2>${product.name}</h2>
-        <div class="product-images">
-            <img src="${product.image}" alt="${product.name}">
-            ${product.additionalImages ? product.additionalImages.map(img => `<img src="${img}" alt="${product.name}">`).join('') : ''}
+        <div class="product-images-container">
+            <div class="main-image">
+                <img src="${product.image}" alt="${product.name}" id="mainProductImage">
+            </div>
+            <div class="thumbnail-images">
+                <img src="${product.image}" alt="${product.name}" onclick="changeMainImage(this.src)">
+                ${product.additionalImages ? product.additionalImages.map(img => `<img src="${img}" alt="${product.name}" onclick="changeMainImage(this.src)">`).join('') : ''}
+            </div>
         </div>
-        <p>${product.description}</p>
-        <p>Price: €${product.price.toFixed(2)}</p>
-        <p>Category: ${product.category}</p>
-        <button onclick="addToCart(${product.id})">Add to Cart</button>
+        <div class="product-info">
+            <h2>${product.name}</h2>
+            <p>${product.description}</p>
+            <p>Price: €${product.price.toFixed(2)}</p>
+            <p>Category: ${product.category}</p>
+            <button onclick="addToCart(${product.id})">Add to Cart</button>
+        </div>
     `;
 
     modal.style.display = "block";
+}
+
+// Add this function to change the main image when a thumbnail is clicked
+function changeMainImage(src) {
+    document.getElementById('mainProductImage').src = src;
 }
 
 // Close the modal when clicking on <span> (x)
