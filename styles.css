@@ -304,7 +304,7 @@ header {
 
 /* Button in modal */
 .modal-content button {
-    background-color: #4CAF50;
+    background-color: #00000;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -319,7 +319,7 @@ header {
 }
 
 .modal-content button:hover {
-    background-color: #45a049;
+    background-color: #E53935;
 }
 
 /* Product details layout */
