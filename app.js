@@ -28,8 +28,8 @@ const products = [
         image: "images/cyberbunk_rebecca.png", 
         category: "t-shirt",
         description: "Show your love for Cyberpunk with this stylish Rebecca t-shirt.",
-        additionalImages: ["images/cyberbunk_rebecca_2.png", "images/cyberbunk_rebecca_3.png"],
-        colors: ["Red", "Blue", "Black"],
+        additionalImages: ["images/cyberbunk_rebecca2.png", "images/black_back.png"],
+        colors: ["White", "Blue", "Black"],
         sizes: ["S", "M", "L", "XL"]
     },
     { id: 2, name: "I Love BMW T-Shirt", price: 15.99, image: "images/love_bmw1.png", category: "t-shirt" },
