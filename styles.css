@@ -85,11 +85,12 @@ header {
 }
 
 #search {
-    width: 100%;
+    width: calc(100% - 22px);
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ddd;
     border-radius: 4px;
+    margin-bottom: 10px;
 }
 
 .filter-container {
@@ -206,6 +207,7 @@ header {
 
 #viewToggle {
     display: flex;
+    margin-bottom: 15px;
 }
 
 .view-button {
