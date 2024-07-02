@@ -148,41 +148,56 @@ function showProductDetails(productId) {
     const modalContent = document.getElementById('modalProductDetails');
 
     modalContent.innerHTML = `
-        <div class="product-images-container">
-            <div class="main-image">
-                <img src="${product.image}" alt="${product.name}" id="mainProductImage">
-            </div>
-            <div class="thumbnail-images">
-                <img src="${product.image}" alt="${product.name}" onclick="changeMainImage(this.src)">
-                ${product.additionalImages ? product.additionalImages.map(img => `<img src="${img}" alt="${product.name}" onclick="changeMainImage(this.src)">`).join('') : ''}
-            </div>
-        </div>
-        <div class="product-info">
-            <h2>${product.name}</h2>
-            <p>${product.description}</p>
-            <p>Price: €${product.price.toFixed(2)}</p>
-            <p>Category: ${product.category}</p>
-            
-            <div class="product-options">
-                <div class="color-options">
-                    <label for="color-select">Color:</label>
-                    <select id="color-select">
-                        ${product.colors.map(color => `<option value="${color}">${color}</option>`).join('')}
-                    </select>
+        <span class="close">&times;</span>
+        <div class="product-details">
+            <div class="product-images-container">
+                <div class="main-image">
+                    <img src="${product.image}" alt="${product.name}" id="mainProductImage">
                 </div>
-                <div class="size-options">
-                    <label for="size-select">Size:</label>
-                    <select id="size-select">
-                        ${product.sizes.map(size => `<option value="${size}">${size}</option>`).join('')}
-                    </select>
+                <div class="thumbnail-images">
+                    <img src="${product.image}" alt="${product.name}" onclick="changeMainImage(this.src)">
+                    ${product.additionalImages ? product.additionalImages.map(img => `<img src="${img}" alt="${product.name}" onclick="changeMainImage(this.src)">`).join('') : ''}
                 </div>
             </div>
-            
-            <button onclick="addToCartFromModal(${product.id})">Add to Cart</button>
+            <div class="product-info">
+                <h2>${product.name}</h2>
+                <p>${product.description}</p>
+                <p>Price: €${product.price.toFixed(2)}</p>
+                <p>Category: ${product.category}</p>
+                
+                <div class="product-options">
+                    <div class="color-options">
+                        <label for="color-select">Color:</label>
+                        <select id="color-select">
+                            ${product.colors.map(color => `<option value="${color}">${color}</option>`).join('')}
+                        </select>
+                    </div>
+                    <div class="size-options">
+                        <label for="size-select">Size:</label>
+                        <select id="size-select">
+                            ${product.sizes.map(size => `<option value="${size}">${size}</option>`).join('')}
+                        </select>
+                    </div>
+                </div>
+                
+                <button onclick="addToCartFromModal(${product.id})">Add to Cart</button>
+            </div>
         </div>
     `;
 
     modal.style.display = "block";
+
+    // Close modal when clicking on <span> (x)
+    document.querySelector('.close').onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Close modal when clicking outside of it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 }
 
 function addToCartFromModal(productId) {
