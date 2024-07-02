@@ -134,11 +134,39 @@ function showProductDetails(productId) {
             <p>${product.description}</p>
             <p>Price: €${product.price.toFixed(2)}</p>
             <p>Category: ${product.category}</p>
-            <button onclick="addToCart(${product.id})">Add to Cart</button>
+            
+            <div class="product-options">
+                <div class="color-options">
+                    <label for="color-select">Color:</label>
+                    <select id="color-select">
+                        ${product.colors.map(color => `<option value="${color}">${color}</option>`).join('')}
+                    </select>
+                </div>
+                <div class="size-options">
+                    <label for="size-select">Size:</label>
+                    <select id="size-select">
+                        ${product.sizes.map(size => `<option value="${size}">${size}</option>`).join('')}
+                    </select>
+                </div>
+            </div>
+            
+            <button onclick="addToCartWithOptions(${product.id})">Add to Cart</button>
         </div>
     `;
 
     modal.style.display = "block";
+}
+
+function addToCartWithOptions(productId) {
+    const color = document.getElementById('color-select').value;
+    const size = document.getElementById('size-select').value;
+    const product = products.find(p => p.id === productId);
+    
+    // Here you would typically update your cart with the selected options
+    console.log(`Added to cart: ${product.name}, Color: ${color}, Size: ${size}`);
+    
+    // Close the modal after adding to cart
+    document.getElementById('productModal').style.display = "none";
 }
 
 // Add this function to change the main image when a thumbnail is clicked
