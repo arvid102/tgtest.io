@@ -21,7 +21,15 @@ document.addEventListener("DOMContentLoaded", initializeNavigation);
 
 // Fetch products from an API or use static data
 const products = [
-    { id: 1, name: "Cyberpunk Rebecca T-Shirt", price: 10.99, image: "images/cyberbunk_rebecca.png", category: "t-shirt" },
+    { 
+        id: 1, 
+        name: "Cyberpunk Rebecca T-Shirt", 
+        price: 10.99, 
+        image: "images/cyberbunk_rebecca.png", 
+        category: "t-shirt",
+        description: "Show your love for Cyberpunk with this stylish Rebecca t-shirt.",
+        additionalImages: ["images/cyberbunk_rebecca_2.png", "images/cyberbunk_rebecca_3.png"]
+    },
     { id: 2, name: "I Love BMW T-Shirt", price: 15.99, image: "images/love_bmw1.png", category: "t-shirt" },
     { id: 3, name: "Gojo T-Shirt", price: 12.99, image: "images/gojo_satoru_nike.png", category: "t-shirt" },
     { id: 4, name: "Just Drift It T-Shirt", price: 18.99, image: "images/just_drift_it.png", category: "t-shirt" },
@@ -95,16 +103,51 @@ function toggleView() {
 function renderProducts(productsToRender) {
     const productsDiv = document.getElementById('products');
     productsDiv.innerHTML = productsToRender.map(product => `
-        <div class="product">
+        <div class="product" onclick="showProductDetails(${product.id})">
             <img src="${product.image}" alt="${product.name}">
             <div class="product-info">
                 <h3>${product.name}</h3>
                 <p>€${product.price.toFixed(2)}</p>
-                <button onclick="addToCart(${product.id})">Add to Cart</button>
+                <button onclick="addToCart(${product.id}); event.stopPropagation();">Add to Cart</button>
             </div>
         </div>
     `).join('');
 }
+
+function showProductDetails(productId) {
+    const product = products.find(p => p.id === productId);
+    const modal = document.getElementById('productModal');
+    const modalContent = document.getElementById('modalProductDetails');
+
+    modalContent.innerHTML = `
+        <h2>${product.name}</h2>
+        <div class="product-images">
+            <img src="${product.image}" alt="${product.name}">
+            ${product.additionalImages ? product.additionalImages.map(img => `<img src="${img}" alt="${product.name}">`).join('') : ''}
+        </div>
+        <p>${product.description}</p>
+        <p>Price: €${product.price.toFixed(2)}</p>
+        <p>Category: ${product.category}</p>
+        <button onclick="addToCart(${product.id})">Add to Cart</button>
+    `;
+
+    modal.style.display = "block";
+}
+
+// Close the modal when clicking on <span> (x)
+document.querySelector('.close').onclick = function() {
+    document.getElementById('productModal').style.display = "none";
+}
+
+// Close the modal when clicking outside of it
+window.onclick = function(event) {
+    const modal = document.getElementById('productModal');
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+
 
 // Add these lines at the end of your existing JavaScript
 document.querySelector('.list-button').addEventListener('click', toggleView);
