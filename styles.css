@@ -212,8 +212,9 @@ header {
 
 .view-button {
     padding: 5px 10px;
+    border: none;
     background-color: #f0f0f0;
-    border: 1px solid #ddd;
+    transition: background-color 0.3s;
     cursor: pointer;
 }
 
