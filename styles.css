@@ -152,21 +152,49 @@ header {
 }
 
 #cart {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     background-color: white;
-    border: 1px solid #ddd;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
     padding: 10px;
+    box-sizing: border-box;
+    z-index: 1000;
+    max-height: 150px; /* Adjust as needed */
+    overflow-y: auto;
 }
 
 .cart-item {
     display: flex;
     justify-content: space-between;
-/*     margin-bottom: 5px; */
+    margin-bottom: 5px;
+    font-size: 14px;
 }
 
 .cart-total {
     font-weight: bold;
     text-align: right;
     margin-top: 10px;
+    font-size: 16px;
+}
+
+/* Style for the scrollbar in the cart */
+#cart::-webkit-scrollbar {
+    width: 6px;
+}
+
+#cart::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+#cart::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+#cart::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 #viewToggle {
