@@ -77,13 +77,19 @@ header {
     margin-bottom: 15px;
 }
 
+.controls-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
 #search {
-    width: calc(100% - 22px);
+    width: 100%;
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    margin-bottom: 10px;
 }
 
 .filter-container {
@@ -200,18 +206,13 @@ header {
 
 #viewToggle {
     display: flex;
-    margin-bottom: 15px;
 }
 
 .view-button {
-    padding: 8px 12px;
-    font-size: 14px;
-    border: none;
+    padding: 5px 10px;
     background-color: #f0f0f0;
+    border: 1px solid #ddd;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    transition: background-color 0.3s;
 }
 
 .view-button:first-child {
@@ -434,5 +435,5 @@ select:focus {
 }
 
 .usercard {
-	float: right;
+    font-weight: bold;
 }
