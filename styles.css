@@ -121,9 +121,38 @@ header {
 }
 
 .filter-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.select-wrapper {
+  flex: 1;
+  position: relative;
+  background-color: #f0f0f0;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.select-wrapper::after {
+  content: "\25BC";
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #888;
+}
+
+select {
+  width: 100%;
+  padding: 12px 40px 12px 20px;
+  font-size: 16px;
+  border: none;
+  background-color: transparent;
+  appearance: none;
+  outline: none;
+  cursor: pointer;
 }
 
 #category, #sort {
