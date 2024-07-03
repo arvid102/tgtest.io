@@ -74,14 +74,14 @@ header {
 }
 
 #controls {
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 .controls-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 #search {
