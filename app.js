@@ -83,7 +83,7 @@ function renderProducts(productsToRender) {
             <div class="product-info">
                 <h3>${product.name}</h3>
                 <p>€${product.price.toFixed(2)}</p>
-                <button onclick="addToCart(${product.id}); event.stopPropagation();">Add to Cart</button>
+                <button onclick="showProductDetails(${product.id})">View More</button>
             </div>
         </div>
     `).join('');
