@@ -73,10 +73,6 @@ header {
     padding: 10px;
 }
 
-#controls {
-    margin-bottom: 5px;
-}
-
 .controls-top {
     display: flex;
     justify-content: space-between;
