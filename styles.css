@@ -112,7 +112,7 @@ header {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    padding: 0 15px; /* This creates the overall indentation */
+    padding: 0 12px; /* This creates the overall indentation */
 }
 
 /* #products {
@@ -130,7 +130,7 @@ header {
     border-radius: 8px;
     padding: 15px;
     text-align: center;
-    margin-bottom: 4px; /* Add some space between products */
+    margin-bottom: 2px; /* Add some space between products */
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
