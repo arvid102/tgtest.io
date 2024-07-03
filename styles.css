@@ -82,7 +82,7 @@ header {
 .search-container {
   display: flex;
   align-items: center;
-  background-color: #f0f0f0;
+  background-color: #fff;
   border-radius: 50px;
   padding: 5px;
   max-width: 600px;
@@ -99,7 +99,7 @@ header {
 }
 
 .search-button {
-  background-color: #ff1493;
+  background-color: #E53935;
   border: none;
   border-radius: 50%;
   width: 40px;
