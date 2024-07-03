@@ -476,13 +476,13 @@ select {
     margin-right: 10px;
 }
 
-select {
+/* select {
     padding: 5px;
     font-size: 16px;
     border: 1px solid #ddd;
     border-radius: 4px;
     background-color: white;
-}
+} */
 
 select:focus {
     outline: none;
