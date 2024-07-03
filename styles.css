@@ -87,6 +87,7 @@ header {
   padding: 5px;
   max-width: 600px;
   margin: 0 auto;
+  margin-bottom: 10px;
 }
 
 #search {
@@ -94,7 +95,6 @@ header {
   border: none;
   background: transparent;
   padding: 10px 15px;
-  margin-bottom: 10px;
   font-size: 16px;
   outline: none;
 }
