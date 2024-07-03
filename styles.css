@@ -212,9 +212,8 @@ header {
 
 .view-button {
     padding: 5px 10px;
-    border: none;
     background-color: #f0f0f0;
-    transition: background-color 0.3s;
+    border: 1px solid #ddd;
     cursor: pointer;
 }
 
@@ -438,5 +437,5 @@ select:focus {
 }
 
 .usercard {
-    font-weight: bold;
+    color: #000;
 }
