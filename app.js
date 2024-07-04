@@ -111,7 +111,7 @@ function renderProducts(productsToRender) {
       <div class="product-info">
         <h3>${product.name}</h3>
         <p>€${product.price.toFixed(2)}</p>
-        <button onclick="showProductDetails(${product.id})">${translations.viewMore || 'View More'}</button>
+        <button onclick="showProductDetails(${product.id})">${i18n.translations.viewMore || 'View More'}</button>
       </div>
     </div>
   `).join('');
