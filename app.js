@@ -77,7 +77,8 @@ function filterProducts() {
         filteredProducts.sort((a, b) => b.price - a.price);
     }
 
-    renderProducts(filteredProducts);
+     renderProducts(filteredProducts);
+      i18n.updateContent();
 }
 
 let isGridView = true;
