@@ -497,5 +497,5 @@ select:focus {
 
 .usercard {
     color: #000;
-    vertical-align: text-top;
+    text-align: center;
 }
