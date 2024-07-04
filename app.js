@@ -76,17 +76,17 @@ function toggleView() {
 }
 
 function renderProducts(productsToRender) {
-    const productsDiv = document.getElementById('products');
-    productsDiv.innerHTML = productsToRender.map(product => `
-        <div class="product" onclick="showProductDetails(${product.id})">
-            <img src="${product.image}" alt="${product.name}">
-            <div class="product-info">
-                <h3>${product.name}</h3>
-                <p>€${product.price.toFixed(2)}</p>
-                <button onclick="showProductDetails(${product.id})">View More</button>
-            </div>
-        </div>
-    `).join('');
+  const productsDiv = document.getElementById('products');
+  productsDiv.innerHTML = productsToRender.map(product => `
+    <div class="product" onclick="showProductDetails(${product.id})">
+      <img src="${product.image}" alt="${product.name}">
+      <div class="product-info">
+        <h3>${product.name}</h3>
+        <p>€${product.price.toFixed(2)}</p>
+        <button onclick="showProductDetails(${product.id})">${translations.viewMore || 'View More'}</button>
+      </div>
+    </div>
+  `).join('');
 }
 
 function showProductDetails(productId) {
@@ -231,3 +231,30 @@ document.getElementById('sort').addEventListener('change', filterProducts);
 let usercard = document.getElementById("usercard");
 let userName = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.last_name}`;
 usercard.textContent = userName;
+
+let currentLang = localStorage.getItem('language') || 'en';
+let translations = {};
+
+async function loadTranslations(lang) {
+  const response = await fetch(`lang/${lang}.json`);
+  translations = await response.json();
+  updatePageContent();
+}
+
+function updatePageContent() {
+  document.querySelectorAll('[data-i18n]').forEach(element => {
+    const key = element.getAttribute('data-i18n');
+    element.textContent = translations[key] || key;
+  });
+}
+
+document.getElementById('languageSelector').addEventListener('change', (e) => {
+  currentLang = e.target.value;
+  localStorage.setItem('language', currentLang);
+  loadTranslations(currentLang);
+});
+
+// Initial load
+loadTranslations(currentLang);
+
+document.getElementById('languageSelector').value = currentLang;
