@@ -11,20 +11,34 @@ const i18n = {
     this.loadTranslations();
   },
 
-  loadTranslations: function() {
-    fetch(`lang/${this.currentLang}.json`)
-      .then(response => response.text())
-      .then(data => {
-        try {
-          this.translations = JSON.parse(data);
-          this.updateContent();
-        } catch (error) {
-          console.error('Error parsing JSON:', error);
-          console.log('Raw JSON data:', data);
+ loadTranslations: function() {
+  fetch(`lang/${this.currentLang}.json`)
+    .then(response => response.text())
+    .then(data => {
+      try {
+        this.translations = JSON.parse(data);
+        this.updateContent();
+      } catch (error) {
+        console.error('Error parsing JSON:', error);
+        console.log('Raw JSON data:', data);
+        // Fallback to English if there's an error
+        if (this.currentLang !== 'en') {
+          console.log('Falling back to English');
+          this.currentLang = 'en';
+          this.loadTranslations();
         }
-      })
-      .catch(error => console.error('Error loading translations:', error));
-  },
+      }
+    })
+    .catch(error => {
+      console.error('Error loading translations:', error);
+      // Fallback to English if there's an error
+      if (this.currentLang !== 'en') {
+        console.log('Falling back to English');
+        this.currentLang = 'en';
+        this.loadTranslations();
+      }
+    });
+},
 
   updateContent: function() {
     document.querySelectorAll('[data-i18n]').forEach(element => {
