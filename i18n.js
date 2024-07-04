@@ -4,16 +4,24 @@ const i18n = {
 
   init: function() {
     this.currentLang = localStorage.getItem('language') || 'en';
-    document.getElementById('languageSelector').value = this.currentLang;
+    const selector = document.getElementById('languageSelector');
+    if (selector) {
+      selector.value = this.currentLang;
+    }
     this.loadTranslations();
   },
 
   loadTranslations: function() {
     fetch(`lang/${this.currentLang}.json`)
-      .then(response => response.json())
+      .then(response => response.text())
       .then(data => {
-        this.translations = data;
-        this.updateContent();
+        try {
+          this.translations = JSON.parse(data);
+          this.updateContent();
+        } catch (error) {
+          console.error('Error parsing JSON:', error);
+          console.log('Raw JSON data:', data);
+        }
       })
       .catch(error => console.error('Error loading translations:', error));
   },
@@ -37,7 +45,10 @@ const i18n = {
 document.addEventListener('DOMContentLoaded', () => {
   i18n.init();
   
-  document.getElementById('languageSelector').addEventListener('change', (e) => {
-    i18n.setLanguage(e.target.value);
-  });
+  const selector = document.getElementById('languageSelector');
+  if (selector) {
+    selector.addEventListener('change', (e) => {
+      i18n.setLanguage(e.target.value);
+    });
+  }
 });
