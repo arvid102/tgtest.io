@@ -17,6 +17,34 @@ function initializeNavigation() {
     }
 }
 
+let currentLang = localStorage.getItem('language') || 'en';
+let translations = {};
+
+async function loadTranslations(lang) {
+  const response = await fetch(`lang/${lang}.json`);
+  translations = await response.json();
+  updatePageContent();
+}
+
+function updatePageContent() {
+  document.querySelectorAll('[data-i18n]').forEach(element => {
+    const key = element.getAttribute('data-i18n');
+    element.textContent = translations[key] || key;
+  });
+}
+
+document.getElementById('languageSelector').addEventListener('change', (e) => {
+  currentLang = e.target.value;
+  localStorage.setItem('language', currentLang);
+  loadTranslations(currentLang);
+});
+
+// Initial load
+loadTranslations(currentLang);
+
+document.getElementById('languageSelector').value = currentLang;
+
+
 document.addEventListener("DOMContentLoaded", initializeNavigation);
 
 let products = [];
@@ -232,29 +260,3 @@ let usercard = document.getElementById("usercard");
 let userName = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.last_name}`;
 usercard.textContent = userName;
 
-let currentLang = localStorage.getItem('language') || 'en';
-let translations = {};
-
-async function loadTranslations(lang) {
-  const response = await fetch(`lang/${lang}.json`);
-  translations = await response.json();
-  updatePageContent();
-}
-
-function updatePageContent() {
-  document.querySelectorAll('[data-i18n]').forEach(element => {
-    const key = element.getAttribute('data-i18n');
-    element.textContent = translations[key] || key;
-  });
-}
-
-document.getElementById('languageSelector').addEventListener('change', (e) => {
-  currentLang = e.target.value;
-  localStorage.setItem('language', currentLang);
-  loadTranslations(currentLang);
-});
-
-// Initial load
-loadTranslations(currentLang);
-
-document.getElementById('languageSelector').value = currentLang;
