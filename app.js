@@ -103,11 +103,9 @@ function renderProducts(productsToRender) {
     productsDiv.innerHTML = productsToRender.map(product => `
         <div class="product" onclick="showProductDetails(${product.id})">
             <img src="${product.image}" alt="${product.name}">
-            <div class="product-info">
-                <h3>${product.name}</h3>
-                <p>€${product.price.toFixed(2)}</p>
-                <button onclick="showProductDetails(${product.id})">${i18n.translate('viewMore')}</button>
-            </div>
+            <h3>${product.name}</h3>
+            <p>€${product.price.toFixed(2)}</p>
+            <button onclick="showProductDetails(${product.id})">${i18n.translate('viewMore')}</button>
         </div>
     `).join('');
 }
