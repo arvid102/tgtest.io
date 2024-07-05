@@ -5,6 +5,8 @@
   "conditions": "NOTEIKUMI",
   "search": "Meklēt...",
   "allCategories": "Visas preces",
-  "sortBy": "Alfabēta secība",
+  "sortBy": "A-z",
+  "priceLowToHigh": "Cena: no mazākas",
+  "priceHighToLow": "Cena: no lielākas",
   "addToCart": "Ielikt grozā"
 }
