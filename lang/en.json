@@ -6,6 +6,8 @@
   "search": "Search products...",
   "allCategories": "All Categories",
   "sortBy": "Sort by Name",
+  "priceLowToHigh": "Price: Low to High",
+  "priceHighToLow": "Price: High to Low",
   "addToCart": "Add to Cart",
   "viewMore": "View More"
 }
