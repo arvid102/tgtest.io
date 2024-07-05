@@ -112,7 +112,8 @@ function filterProducts() {
     }
 
      renderProducts(filteredProducts);
-      i18n.updateContent();
+        if (typeof i18n !== 'undefined') {
+        i18n.updateContent();
 }
 
 let isGridView = true;
