@@ -1,3 +1,13 @@
+console.log('app.js loaded');
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded in app.js');
+    // Attach event listeners here
+    document.getElementById('sort').addEventListener('change', () => {
+        console.log('Sort changed:', document.getElementById('sort').value);
+        filterProducts();
+    });
+});
+
 let tg = window.Telegram.WebApp;
 
 tg.expand();
@@ -48,6 +58,7 @@ function filterProducts() {
         (category === '' || product.category === category)
     );
 
+    // Sorting
     if (sortBy === 'name') {
         filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
     } else if (sortBy === 'price-asc') {
@@ -55,6 +66,8 @@ function filterProducts() {
     } else if (sortBy === 'price-desc') {
         filteredProducts.sort((a, b) => b.price - a.price);
     }
+
+    console.log('Filtered and sorted products:', filteredProducts);
 
     renderProducts(filteredProducts);
     if (typeof i18n !== 'undefined') {
