@@ -6,6 +6,8 @@
   "search": "Поиск...",
   "allCategories": "Все товары",
   "sortBy": "А-Z",
+  "priceLowToHigh": "Цена: по возрастанию",
+  "priceHighToLow": "Цена: по убыванию",
   "addToCart": "Добавить в корзину",
   "viewMore": "Посматреть"
 }
