@@ -17,6 +17,40 @@ function initializeNavigation() {
     }
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    const languageSelector = document.querySelector('.language-selector');
+    const selectedLanguage = languageSelector.querySelector('.selected-language');
+    const languageOptions = languageSelector.querySelector('.language-options');
+    const currentLanguageSpan = languageSelector.querySelector('.current-language');
+
+    selectedLanguage.addEventListener('click', (e) => {
+        e.stopPropagation();
+        languageOptions.style.display = languageOptions.style.display === 'block' ? 'none' : 'block';
+    });
+
+    languageOptions.addEventListener('click', (e) => {
+        if (e.target.tagName === 'LI') {
+            const selectedLang = e.target.getAttribute('data-lang');
+            const selectedText = e.target.textContent;
+            
+            currentLanguageSpan.textContent = selectedText;
+
+            languageOptions.querySelectorAll('li').forEach(li => {
+                li.classList.remove('selected');
+            });
+            e.target.classList.add('selected');
+
+            languageOptions.style.display = 'none';
+
+            i18n.setLanguage(selectedLang);
+        }
+    });
+
+    document.addEventListener('click', () => {
+        languageOptions.style.display = 'none';
+    });
+});
+
 // let currentLang = localStorage.getItem('language') || 'en';
 // let translations = {};
 
