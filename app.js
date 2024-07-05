@@ -18,68 +18,13 @@ function initializeNavigation() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const languageSelector = document.querySelector('.language-selector');
-    const selectedLanguage = languageSelector.querySelector('.selected-language');
-    const languageOptions = languageSelector.querySelector('.language-options');
-    const currentLanguageSpan = languageSelector.querySelector('.current-language');
-
-    selectedLanguage.addEventListener('click', (e) => {
-        e.stopPropagation();
-        languageOptions.style.display = languageOptions.style.display === 'block' ? 'none' : 'block';
-    });
-
-    languageOptions.addEventListener('click', (e) => {
-        if (e.target.tagName === 'LI') {
-            const selectedLang = e.target.getAttribute('data-lang');
-            const selectedText = e.target.textContent;
-            
-            currentLanguageSpan.textContent = selectedText;
-
-            languageOptions.querySelectorAll('li').forEach(li => {
-                li.classList.remove('selected');
-            });
-            e.target.classList.add('selected');
-
-            languageOptions.style.display = 'none';
-
-            i18n.setLanguage(selectedLang);
-        }
-    });
-
-    document.addEventListener('click', () => {
-        languageOptions.style.display = 'none';
-    });
+    initializeNavigation();
+    if (typeof i18n !== 'undefined') {
+        i18n.init();
+    } else {
+        console.error('i18n is not defined. Make sure i18n.js is loaded.');
+    }
 });
-
-// let currentLang = localStorage.getItem('language') || 'en';
-// let translations = {};
-
-// async function loadTranslations(lang) {
-//   const response = await fetch(`lang/${lang}.json`);
-//   translations = await response.json();
-//   updatePageContent();
-// }
-
-// function updatePageContent() {
-//   document.querySelectorAll('[data-i18n]').forEach(element => {
-//     const key = element.getAttribute('data-i18n');
-//     element.textContent = translations[key] || key;
-//   });
-// }
-
-// document.getElementById('languageSelector').addEventListener('change', (e) => {
-//   currentLang = e.target.value;
-//   localStorage.setItem('language', currentLang);
-//   loadTranslations(currentLang);
-// });
-
-// // Initial load
-// loadTranslations(currentLang);
-
-// document.getElementById('languageSelector').value = currentLang;
-
-
-document.addEventListener("DOMContentLoaded", initializeNavigation);
 
 let products = [];
 const cart = [];
@@ -111,9 +56,10 @@ function filterProducts() {
         filteredProducts.sort((a, b) => b.price - a.price);
     }
 
-     renderProducts(filteredProducts);
-        if (typeof i18n !== 'undefined') {
+    renderProducts(filteredProducts);
+    if (typeof i18n !== 'undefined') {
         i18n.updateContent();
+    }
 }
 
 let isGridView = true;
@@ -293,6 +239,7 @@ document.getElementById('category').addEventListener('change', filterProducts);
 document.getElementById('sort').addEventListener('change', filterProducts);
 
 let usercard = document.getElementById("usercard");
-let userName = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.last_name}`;
-usercard.textContent = userName;
-
+if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+    let userName = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.last_name}`;
+    usercard.textContent = userName;
+}
