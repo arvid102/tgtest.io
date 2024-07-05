@@ -9,18 +9,32 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-    <header>
-        <a href="index.html"><img src="logo.png" alt="Logo" class="logo"></a>
+ <header>
+    <a href="index.html"><img src="logo.png" alt="Logo" class="logo"></a>
+    <nav>
+        <div class="language-selector">
+            <div class="selected-language">
+                <span class="globe-icon">🌐</span>
+                <span class="current-language">English</span>
+                <span class="dropdown-arrow">▼</span>
+            </div>
+            <ul class="language-options">
+                <li data-lang="en" class="selected">English</li>
+                <li data-lang="lv">Latviešu</li>
+                <li data-lang="ru">Русский</li>
+            </ul>
+        </div>
         <button id="menuButton" class="menu-button">☰</button>
-    </header>
+    </nav>
+</header>
     
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
         <div class="sidenav-content">
-            <a href="index.html">HOME</a>
-            <a href="about.html">ABOUT US</a>
-            <a href="contacts.html">CONTACTS</a>
-            <a href="conditions.html">CONDITIONS</a>
+            <a href="index.html" data-i18n="home">HOME</a>
+            <a href="about.html" data-i18n="about">ABOUT US</a>
+            <a href="contacts.html" data-i18n="contacts">CONTACTS</a>
+            <a href="conditions.html" data-i18n="conditions">CONDITIONS</a>
         </div>
     </div>
 
