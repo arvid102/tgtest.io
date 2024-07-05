@@ -139,17 +139,17 @@ function toggleView() {
 }
 
 function renderProducts(productsToRender) {
-  const productsDiv = document.getElementById('products');
-  productsDiv.innerHTML = productsToRender.map(product => `
-    <div class="product" onclick="showProductDetails(${product.id})">
-      <img src="${product.image}" alt="${product.name}">
-      <div class="product-info">
-        <h3>${product.name}</h3>
-        <p>€${product.price.toFixed(2)}</p>
-        <button onclick="showProductDetails(${product.id})">${i18n.translations.viewMore || 'View More'}</button>
-      </div>
-    </div>
-  `).join('');
+    const productsDiv = document.getElementById('products');
+    productsDiv.innerHTML = productsToRender.map(product => `
+        <div class="product" onclick="showProductDetails(${product.id})">
+            <img src="${product.image}" alt="${product.name}">
+            <div class="product-info">
+                <h3>${product.name}</h3>
+                <p>€${product.price.toFixed(2)}</p>
+                <button onclick="showProductDetails(${product.id})">${i18n.translate('viewMore')}</button>
+            </div>
+        </div>
+    `).join('');
 }
 
 function showProductDetails(productId) {
