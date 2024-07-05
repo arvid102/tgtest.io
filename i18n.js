@@ -16,36 +16,42 @@ const i18n = {
         this.setupLanguageSelector();
     },
 
-    loadTranslations: function() {
-        fetch(`lang/${this.currentLang}.json`)
-            .then(response => response.json())
-            .then(data => {
-                this.translations = data;
-                this.updateContent();
-            })
-            .catch(error => {
-                console.error('Error loading translations:', error);
-                if (this.currentLang !== 'en') {
-                    console.log('Falling back to English');
-                    this.currentLang = 'en';
-                    this.loadTranslations();
-                }
-            });
-    },
+        loadTranslations: function() {
+            console.log('Loading translations for:', this.currentLang);
+            fetch(`lang/${this.currentLang}.json`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Translations loaded:', data);
+                    this.translations = data;
+                    this.updateContent();
+                })
+                .catch(error => {
+                    console.error('Error loading translations:', error);
+                    if (this.currentLang !== 'en') {
+                        console.log('Falling back to English');
+                        this.currentLang = 'en';
+                        this.loadTranslations();
+                    }
+                });
+        },
 
     updateContent: function() {
-        document.querySelectorAll('[data-i18n]').forEach(element => {
-            const key = element.getAttribute('data-i18n');
-            if (this.translations[key]) {
-                if (element.tagName === 'INPUT' && element.getAttribute('placeholder')) {
-                    element.placeholder = this.translations[key];
-                } else {
-                    element.textContent = this.translations[key];
-                }
+    console.log('Updating content');
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        console.log('Translating:', key, 'to:', this.translations[key]);
+        if (this.translations[key]) {
+            if (element.tagName === 'INPUT' && element.getAttribute('placeholder')) {
+                element.placeholder = this.translations[key];
+            } else {
+                element.textContent = this.translations[key];
             }
-        });
-        this.updateDynamicContent();
-    },
+        } else {
+            console.warn('Missing translation for:', key);
+        }
+    });
+    this.updateDynamicContent();
+},
 
     updateDynamicContent: function() {
         // Update dynamic content like product listings
@@ -56,19 +62,20 @@ const i18n = {
     },
 
     setLanguage: function(lang) {
-        this.currentLang = lang;
-        localStorage.setItem('language', lang);
-        this.loadTranslations();
-        
-        const selector = document.querySelector('.language-selector');
-        if (selector) {
-            const currentLanguageSpan = selector.querySelector('.current-language');
-            const selectedOption = selector.querySelector(`.language-options li[data-lang="${lang}"]`);
-            if (currentLanguageSpan && selectedOption) {
-                currentLanguageSpan.textContent = selectedOption.textContent;
-            }
+    console.log('Setting language to:', lang);
+    this.currentLang = lang;
+    localStorage.setItem('language', lang);
+    this.loadTranslations();
+    
+    const selector = document.querySelector('.language-selector');
+    if (selector) {
+        const currentLanguageSpan = selector.querySelector('.current-language');
+        const selectedOption = selector.querySelector(`.language-options li[data-lang="${lang}"]`);
+        if (currentLanguageSpan && selectedOption) {
+            currentLanguageSpan.textContent = selectedOption.textContent;
         }
-    },
+    }
+},
 
     translate: function(key) {
         return this.translations[key] || key;
@@ -126,5 +133,6 @@ const i18n = {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('Initializing i18n');
     i18n.init();
 });
