@@ -33,6 +33,46 @@ const i18n = {
         });
     },
 
+    translate: function(key) {
+        return this.translations[key] || key;
+    },
+
+    setupLanguageSelector: function() {
+        const languageSelector = document.querySelector('.language-selector');
+        const selectedLanguage = languageSelector.querySelector('.selected-language');
+        const languageOptions = languageSelector.querySelector('.language-options');
+
+        selectedLanguage.addEventListener('click', (e) => {
+            e.stopPropagation();
+            languageOptions.style.display = languageOptions.style.display === 'block' ? 'none' : 'block';
+        });
+
+        languageOptions.addEventListener('click', (e) => {
+            if (e.target.tagName === 'LI') {
+                const selectedLang = e.target.getAttribute('data-lang');
+                this.setLanguage(selectedLang);
+                languageOptions.style.display = 'none';
+            }
+        });
+
+        document.addEventListener('click', () => {
+            languageOptions.style.display = 'none';
+        });
+    },
+
+    setLanguage: function(lang) {
+        this.currentLang = lang;
+        this.loadTranslations();
+        const currentLanguageSpan = document.querySelector('.current-language');
+        currentLanguageSpan.textContent = document.querySelector(`.language-options li[data-lang="${lang}"]`).textContent;
+    }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded, initializing i18n');
+    i18n.init();
+});
+
     updateDynamicContent: function() {
         // Update dynamic content like product listings
         if (typeof renderProducts === 'function' && typeof products !== 'undefined') {
