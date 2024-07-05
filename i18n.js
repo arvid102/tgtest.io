@@ -3,15 +3,7 @@ const i18n = {
     currentLang: 'en',
 
     init: function() {
-        this.currentLang = localStorage.getItem('language') || 'en';
-        const selector = document.querySelector('.language-selector');
-        if (selector) {
-            const currentLanguageSpan = selector.querySelector('.current-language');
-            const selectedOption = selector.querySelector(`.language-options li[data-lang="${this.currentLang}"]`);
-            if (currentLanguageSpan && selectedOption) {
-                currentLanguageSpan.textContent = selectedOption.textContent;
-            }
-        }
+        console.log('i18n init called');
         this.loadTranslations();
         this.setupLanguageSelector();
     },
@@ -27,11 +19,6 @@ const i18n = {
             })
             .catch(error => {
                 console.error('Error loading translations:', error);
-                if (this.currentLang !== 'en') {
-                    console.log('Falling back to English');
-                    this.currentLang = 'en';
-                    this.loadTranslations();
-                }
             });
     },
 
@@ -41,16 +28,9 @@ const i18n = {
             const key = element.getAttribute('data-i18n');
             console.log('Translating:', key, 'to:', this.translations[key]);
             if (this.translations[key]) {
-                if (element.tagName === 'INPUT' && element.getAttribute('placeholder')) {
-                    element.placeholder = this.translations[key];
-                } else {
-                    element.textContent = this.translations[key];
-                }
-            } else {
-                console.warn('Missing translation for:', key);
+                element.textContent = this.translations[key];
             }
         });
-        this.updateDynamicContent();
     },
 
     updateDynamicContent: function() {
@@ -77,53 +57,32 @@ const i18n = {
         }
     },
 
-    translate: function(key) {
+  translate: function(key) {
         return this.translations[key] || key;
     },
 
     setupLanguageSelector: function() {
         const languageSelector = document.querySelector('.language-selector');
-        if (!languageSelector) {
-            console.log('Language selector not found');
-            return;
-        }
-
         const selectedLanguage = languageSelector.querySelector('.selected-language');
         const languageOptions = languageSelector.querySelector('.language-options');
-        const currentLanguageSpan = languageSelector.querySelector('.current-language');
-
-        if (!selectedLanguage || !languageOptions || !currentLanguageSpan) {
-            console.log('Language selector elements not found');
-            return;
-        }
-
-        // Ensure language options are initially hidden
-        languageOptions.style.display = 'none';
 
         selectedLanguage.addEventListener('click', (e) => {
             e.stopPropagation();
-            console.log('Language selector clicked');
             languageOptions.style.display = languageOptions.style.display === 'block' ? 'none' : 'block';
         });
 
         languageOptions.addEventListener('click', (e) => {
             if (e.target.tagName === 'LI') {
-                console.log('Language option clicked:', e.target.textContent);
                 const selectedLang = e.target.getAttribute('data-lang');
-                const selectedText = e.target.textContent;
-                
-                currentLanguageSpan.textContent = selectedText;
-
-                languageOptions.querySelectorAll('li').forEach(li => {
-                    li.classList.remove('selected');
-                });
-                e.target.classList.add('selected');
-
-                languageOptions.style.display = 'none';
-
                 this.setLanguage(selectedLang);
+                languageOptions.style.display = 'none';
             }
         });
+
+        document.addEventListener('click', () => {
+            languageOptions.style.display = 'none';
+        });
+    },
 
         document.addEventListener('click', () => {
             languageOptions.style.display = 'none';
@@ -133,7 +92,15 @@ const i18n = {
     }
 };
 
+setLanguage: function(lang) {
+        this.currentLang = lang;
+        this.loadTranslations();
+        const currentLanguageSpan = document.querySelector('.current-language');
+        currentLanguageSpan.textContent = document.querySelector(`.language-options li[data-lang="${lang}"]`).textContent;
+    }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Initializing i18n');
+    console.log('DOM loaded, initializing i18n');
     i18n.init();
 });
