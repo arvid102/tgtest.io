@@ -6,35 +6,20 @@
     <title>Telegram Web App Shop</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src="i18n.js"></script>
 </head>
 <body>
-<header>
-    <a href="index.html"><img src="logo.png" alt="Logo" class="logo"></a>
-    <nav>
-        <div class="language-selector">
-            <div class="selected-language">
-                <span class="globe-icon">🌐</span>
-                <span class="current-language">English</span>
-                <span class="dropdown-arrow">▼</span>
-            </div>
-            <ul class="language-options">
-                <li data-lang="en" class="selected">English</li>
-                <li data-lang="lv">Latviešu</li>
-                <li data-lang="ru">Русский</li>
-            </ul>
-        </div>
+   <header>
+        <a href="index.html"><img src="logo.png" alt="Logo" class="logo"></a>
         <button id="menuButton" class="menu-button">☰</button>
-    </nav>
-</header>
+    </header>
     
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
         <div class="sidenav-content">
-            <a href="index.html" data-i18n="home">HOME</a>
-            <a href="about.html" data-i18n="about">ABOUT US</a>
-            <a href="contacts.html" data-i18n="contacts">CONTACTS</a>
-            <a href="conditions.html" data-i18n="conditions">CONDITIONS</a>
+            <a href="index.html">HOME</a>
+            <a href="about.html">ABOUT US</a>
+            <a href="contacts.html">CONTACTS</a>
+            <a href="conditions.html">CONDITIONS</a>
         </div>
     </div>
 
@@ -51,35 +36,24 @@
             </div>
             <div class="usercard" id="usercard"></div>
         </div>
-        <div class="search-container">
-          <input type="text" id="search" placeholder="Search products...">
-          <button class="search-button">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-              <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-            </svg>
-          </button>
-        </div>
+        <input type="text" id="search" placeholder="Search products...">
     </div>
             
-           <div class="filter-container">
-                <div class="select-wrapper">
-                  <select id="category">
-                    <option value="" data-i18n="allCategories">All Categories</option>
+            <div class="filter-container">
+                <select id="category">
+                    <option value="">All Categories</option>
                     <option value="t-shirt">T-Shirts</option>
                     <option value="accessory">Accessories</option>
                     <option value="decor">Decor</option>
-                  </select>
-                </div>
-                <div class="select-wrapper">
-                  <select id="sort">
-                        <option value="name" data-i18n="sortByName">Sort by Name</option>
-                        <option value="price-asc" data-i18n="priceLowToHigh">Price: Low to High</option>
-                        <option value="price-desc" data-i18n="priceHighToLow">Price: High to Low</option>
-                  </select>
-                </div>
-              </div>
+                </select>
+                <select id="sort">
+                    <option value="name">Sort by Name</option>
+                    <option value="price-asc">Price: Low to High</option>
+                    <option value="price-desc">Price: High to Low</option>
+                </select>
             </div>
-    
+        
+        </div>
         <div id="products"></div>
         <div id="cart"></div>
     </div>
