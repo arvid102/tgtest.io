@@ -140,6 +140,24 @@ setLanguage: function(lang) {
     }
 };
 
+window.i18n = i18n;
+
+function loadAndRenderProducts() {
+    if (typeof i18n !== 'undefined') {
+        // Your existing product loading and rendering code
+    } else {
+        console.error('i18n is not defined. Retrying in 1 second...');
+        setTimeout(loadAndRenderProducts, 1000);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (typeof i18n !== 'undefined') {
+        i18n.init();
+    }
+    loadAndRenderProducts();
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM loaded, initializing i18n');
     i18n.init();
