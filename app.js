@@ -1,13 +1,3 @@
-console.log('app.js loaded');
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM loaded in app.js');
-    // Attach event listeners here
-    document.getElementById('sort').addEventListener('change', () => {
-        console.log('Sort changed:', document.getElementById('sort').value);
-        filterProducts();
-    });
-});
-
 let tg = window.Telegram.WebApp;
 
 tg.expand();
@@ -27,26 +17,72 @@ function initializeNavigation() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    initializeNavigation();
-    if (typeof i18n !== 'undefined') {
-        i18n.init();
-    } else {
-        console.error('i18n is not defined. Make sure i18n.js is loaded.');
-    }
-});
+document.addEventListener("DOMContentLoaded", initializeNavigation);
 
-let products = [];
+// Fetch products from an API or use static data
+const products = [
+    { 
+        id: 1, 
+        name: "Cyberpunk Rebecca T-Shirt", 
+        price: 10.99, 
+        image: "images/cyberbunk_rebecca.png", 
+        category: "t-shirt",
+        description: "Show your love for Cyberpunk with this stylish Rebecca t-shirt.",
+        additionalImages: ["images/cyberpunk_rebecca2.png", "images/black_back.png"],
+        colors: ["White", "Blue", "Black"],
+        sizes: ["S", "M", "L", "XL"]
+    },
+    {
+        id: 2, 
+        name: "I Love BMW T-Shirt", 
+        price: 15.99, 
+        image: "images/love_bmw1.png", 
+        category: "t-shirt",
+        description: "t-shirt.",
+        additionalImages: ["images/black_back.png"],
+        colors: ["White", "Blue", "Black"],
+        sizes: ["S", "M", "L", "XL"]
+    },
+    { 
+        id: 3, 
+        name: "Gojo T-Shirt", 
+        price: 12.99, 
+        image: "images/gojo_satoru_nike.png", 
+        category: "t-shirt",
+        description: "t-shirt.",
+        additionalImages: ["images/black_back.png"],
+        colors: ["White", "Blue", "Black"],
+        sizes: ["S", "M", "L", "XL"]
+    },
+    { id: 4, name: "Just Drift It T-Shirt", price: 18.99, image: "images/just_drift_it.png", category: "t-shirt",
+        description: "t-shirt.",
+        additionalImages: ["images/black_back.png"],
+        colors: ["White", "Blue", "Black"],
+        sizes: ["S", "M", "L", "XL"] },
+    { id: 5, name: "Solo Leveling T-Shirt", price: 25.99, image: "images/solo_lvl_0.png", category: "t-shirt",
+        description: "t-shirt.",
+        additionalImages: ["images/black_back.png"] },
+    { id: 6, name: "Himiko Toga T-Shirt", price: 5.99, image: "images/himiko_toga.png", category: "t-shirt" },
+    { id: 7, name: "GTR Godzila T-Shirt", price: 15.99, image: "images/unisex-basic-softstyle-t-shirt-black-front-66140a7d886f6.png", category: "t-shirt" },
+    { id: 8, name: "Nezuko Lightbox", price: 25.99, image: "images/Visual-Night-Lights-LED-Demon-Slayer.jpg", category: "decor" },
+    { id: 9, name: "Ghoul Lightbox", price: 24.99, image: "images/Anime-Lightbox-Tokyo-Ghoul2.jpg", category: "decor" },
+    { id: 10, name: "Toga T-Shirt", price: 5.99, image: "images/himiko_toga.png", category: "t-shirt" },
+    { id: 11, name: "imiko Toga T-Shirt", price: 5.99, image: "images/himiko_toga.png", category: "t-shirt" },
+    { id: 12, name: "Display Frame Case", price: 5.99, image: "images/Hot-Sale-1-Set-70-70mm-Black-3D-Floating-Jewelry-Coin-Display-Frame-Holder-Box-Case.jpg_.webp", category: "decor" },
+    { id: 13, name: "Toga T-Shirt", price: 10.99, image: "images/himiko_toga.png", category: "t-shirt" },
+    { id: 14, name: "MHA T-Shirt", price: 9.99, image: "images/himiko_toga.png", category: "t-shirt" },
+    { id: 15, name: "MHA Toga T-Shirt", price: 5.99, image: "images/himiko_toga.png", category: "t-shirt" },
+    { id: 16, name: "imi Toga T-Shirt", price: 8.99, image: "images/himiko_toga.png", category: "t-shirt" },
+    { id: 17, name: "ko Toga T-Shirt", price: 12.99, image: "images/himiko_toga.png", category: "t-shirt" },
+    { id: 18, name: "H Toga T-Shirt", price: 9.99, image: "images/himiko_toga.png", category: "t-shirt" },
+    { id: 19, name: "My Toga T-Shirt", price: 6.99, image: "images/himiko_toga.png", category: "t-shirt" },
+    { id: 20, name: "My hero Toga T-Shirt", price: 5.99, image: "images/himiko_toga.png", category: "t-shirt" },
+    { id: 21, name: "White Toga T-Shirt", price: 10.99, image: "images/himiko_toga.png", category: "t-shirt" },
+    { id: 22, name: "mha Toga T-Shirt", price: 17.99, image: "images/himiko_toga.png", category: "t-shirt" },
+    // Add more products...
+];
+
 const cart = [];
-
-// Fetch products from JSON file
-fetch('products.json')
-    .then(response => response.json())
-    .then(data => {
-        products = data.products;
-        filterProducts();
-    })
-    .catch(error => console.error('Error loading products:', error));
 
 function filterProducts() {
     const searchTerm = document.getElementById('search').value.toLowerCase();
@@ -58,7 +94,6 @@ function filterProducts() {
         (category === '' || product.category === category)
     );
 
-    // Sorting
     if (sortBy === 'name') {
         filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
     } else if (sortBy === 'price-asc') {
@@ -67,12 +102,7 @@ function filterProducts() {
         filteredProducts.sort((a, b) => b.price - a.price);
     }
 
-    console.log('Filtered and sorted products:', filteredProducts);
-
     renderProducts(filteredProducts);
-    if (typeof i18n !== 'undefined') {
-        i18n.updateContent();
-    }
 }
 
 let isGridView = true;
@@ -103,9 +133,11 @@ function renderProducts(productsToRender) {
     productsDiv.innerHTML = productsToRender.map(product => `
         <div class="product" onclick="showProductDetails(${product.id})">
             <img src="${product.image}" alt="${product.name}">
-            <h3>${product.name}</h3>
-            <p>€${product.price.toFixed(2)}</p>
-            <button onclick="showProductDetails(${product.id})">${i18n.translate('viewMore')}</button>
+            <div class="product-info">
+                <h3>${product.name}</h3>
+                <p>€${product.price.toFixed(2)}</p>
+                <button onclick="addToCart(${product.id}); event.stopPropagation();">Add to Cart</button>
+            </div>
         </div>
     `).join('');
 }
@@ -129,11 +161,10 @@ function showProductDetails(productId) {
             </div>
             <div class="product-info">
                 <h2>${product.name}</h2>
-                <p>${product.description || ''}</p>
+                <p>${product.description}</p>
                 <p>Price: €${product.price.toFixed(2)}</p>
                 <p>Category: ${product.category}</p>
                 
-                ${product.colors ? `
                 <div class="product-options">
                     <div class="color-options">
                         <label for="color-select">Color:</label>
@@ -141,11 +172,6 @@ function showProductDetails(productId) {
                             ${product.colors.map(color => `<option value="${color}">${color}</option>`).join('')}
                         </select>
                     </div>
-                </div>
-                ` : ''}
-                
-                ${product.sizes ? `
-                <div class="product-options">
                     <div class="size-options">
                         <label for="size-select">Size:</label>
                         <select id="size-select">
@@ -153,7 +179,6 @@ function showProductDetails(productId) {
                         </select>
                     </div>
                 </div>
-                ` : ''}
                 
                 <button onclick="addToCartFromModal(${product.id})">Add to Cart</button>
             </div>
@@ -162,11 +187,13 @@ function showProductDetails(productId) {
 
     modal.style.display = "block";
 
+    // Attach event listener to close button after content is inserted
     const closeButton = modalContent.querySelector('.close');
     closeButton.onclick = function() {
         modal.style.display = "none";
     }
 
+    // Close modal when clicking outside of it
     window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = "none";
@@ -175,14 +202,49 @@ function showProductDetails(productId) {
 }
 
 function addToCartFromModal(productId) {
-    const color = document.getElementById('color-select')?.value;
-    const size = document.getElementById('size-select')?.value;
+    const color = document.getElementById('color-select').value;
+    const size = document.getElementById('size-select').value;
     addToCart(productId, color, size);
 }
 
+function addToCartWithOptions(productId) {
+    const color = document.getElementById('color-select').value;
+    const size = document.getElementById('size-select').value;
+    const product = products.find(p => p.id === productId);
+    
+    // Here you would typically update your cart with the selected options
+    console.log(`Added to cart: ${product.name}, Color: ${color}, Size: ${size}`);
+    
+    // Close the modal after adding to cart
+    document.getElementById('productModal').style.display = "none";
+}
+
+// Add this function to change the main image when a thumbnail is clicked
 function changeMainImage(src) {
     document.getElementById('mainProductImage').src = src;
 }
+
+// Close the modal when clicking on <span> (x)
+document.querySelector('.close').onclick = function() {
+    document.getElementById('productModal').style.display = "none";
+}
+
+// Close the modal when clicking outside of it
+window.onclick = function(event) {
+    const modal = document.getElementById('productModal');
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+
+
+// Add these lines at the end of your existing JavaScript
+document.querySelector('.list-button').addEventListener('click', toggleView);
+document.querySelector('.grid-button').addEventListener('click', toggleView);
+
+// Initial setup
+document.getElementById('products').classList.add('grid-view');
 
 function addToCart(productId, color, size) {
     const product = products.find(p => p.id === productId);
@@ -196,6 +258,7 @@ function addToCart(productId, color, size) {
     cart.push(cartItem);
     updateCart();
     
+    // Close the modal after adding to cart
     document.getElementById('productModal').style.display = "none";
 }
 
@@ -221,13 +284,14 @@ function updateCart() {
     cartDiv.innerHTML = `
         ${Object.values(cartItems).map(item => `
             <div class="cart-item">
-                <span>${item.name} ${item.color ? `(${item.color})` : ''} ${item.size ? `(${item.size})` : ''} x${item.quantity}</span>
+                <span>${item.name} (${item.color}, ${item.size}) x${item.quantity}</span>
                 <span>€${(item.price * item.quantity).toFixed(2)}</span>
             </div>
         `).join('')}
         <div class="cart-total">Total: €${total.toFixed(2)}</div>
     `;
 
+    // Enable the Main Button when cart is not empty
     if (cart.length > 0) {
         tg.MainButton.text = "Place Order";
         tg.MainButton.show();
@@ -240,17 +304,15 @@ tg.MainButton.onClick(() => {
     tg.sendData(JSON.stringify(cart));
 });
 
-document.querySelector('.list-button').addEventListener('click', toggleView);
-document.querySelector('.grid-button').addEventListener('click', toggleView);
+// Initial render
+filterProducts();
 
-document.getElementById('products').classList.add('grid-view');
-
+// Add event listeners
 document.getElementById('search').addEventListener('input', filterProducts);
 document.getElementById('category').addEventListener('change', filterProducts);
 document.getElementById('sort').addEventListener('change', filterProducts);
 
+
 let usercard = document.getElementById("usercard");
-if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
-    let userName = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.last_name}`;
-    usercard.textContent = userName;
-}
+let userName = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.last_name}`;
+usercard.textContent = userName;
