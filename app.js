@@ -1,6 +1,7 @@
 let tg = window.Telegram.WebApp;
 
 tg.expand();
+tg.ready();
 
 function openNav() {
     document.getElementById("mySidenav").style.width = "100%";
@@ -249,6 +250,8 @@ function updateCart() {
 }
 
 tg.MainButton.onClick(() => {
+    console.log("Place Order button clicked");
+    console.log("Cart contents:", JSON.stringify(cart));
     tg.sendData(JSON.stringify(cart));
 });
 
