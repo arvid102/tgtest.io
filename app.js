@@ -20,69 +20,17 @@ function initializeNavigation() {
 document.addEventListener("DOMContentLoaded", initializeNavigation);
 
 // Fetch products from an API or use static data
-const products = [
-    { 
-        id: 1, 
-        name: "Cyberpunk Rebecca T-Shirt", 
-        price: 10.99, 
-        image: "images/cyberbunk_rebecca.png", 
-        category: "t-shirt",
-        description: "Show your love for Cyberpunk with this stylish Rebecca t-shirt.",
-        additionalImages: ["images/cyberpunk_rebecca2.png", "images/black_back.png"],
-        colors: ["White", "Blue", "Black"],
-        sizes: ["S", "M", "L", "XL"]
-    },
-    {
-        id: 2, 
-        name: "I Love BMW T-Shirt", 
-        price: 15.99, 
-        image: "images/love_bmw1.png", 
-        category: "t-shirt",
-        description: "t-shirt.",
-        additionalImages: ["images/black_back.png"],
-        colors: ["White", "Blue", "Black"],
-        sizes: ["S", "M", "L", "XL"]
-    },
-    { 
-        id: 3, 
-        name: "Gojo T-Shirt", 
-        price: 12.99, 
-        image: "images/gojo_satoru_nike.png", 
-        category: "t-shirt",
-        description: "t-shirt.",
-        additionalImages: ["images/black_back.png"],
-        colors: ["White", "Blue", "Black"],
-        sizes: ["S", "M", "L", "XL"]
-    },
-    { id: 4, name: "Just Drift It T-Shirt", price: 18.99, image: "images/just_drift_it.png", category: "t-shirt",
-        description: "t-shirt.",
-        additionalImages: ["images/black_back.png"],
-        colors: ["White", "Blue", "Black"],
-        sizes: ["S", "M", "L", "XL"] },
-    { id: 5, name: "Solo Leveling T-Shirt", price: 25.99, image: "images/solo_lvl_0.png", category: "t-shirt",
-        description: "t-shirt.",
-        additionalImages: ["images/black_back.png"] },
-    { id: 6, name: "Himiko Toga T-Shirt", price: 5.99, image: "images/himiko_toga.png", category: "t-shirt" },
-    { id: 7, name: "GTR Godzila T-Shirt", price: 15.99, image: "images/unisex-basic-softstyle-t-shirt-black-front-66140a7d886f6.png", category: "t-shirt" },
-    { id: 8, name: "Nezuko Lightbox", price: 25.99, image: "images/Visual-Night-Lights-LED-Demon-Slayer.jpg", category: "decor" },
-    { id: 9, name: "Ghoul Lightbox", price: 24.99, image: "images/Anime-Lightbox-Tokyo-Ghoul2.jpg", category: "decor" },
-    { id: 10, name: "Toga T-Shirt", price: 5.99, image: "images/himiko_toga.png", category: "t-shirt" },
-    { id: 11, name: "imiko Toga T-Shirt", price: 5.99, image: "images/himiko_toga.png", category: "t-shirt" },
-    { id: 12, name: "Display Frame Case", price: 5.99, image: "images/Hot-Sale-1-Set-70-70mm-Black-3D-Floating-Jewelry-Coin-Display-Frame-Holder-Box-Case.jpg_.webp", category: "decor" },
-    { id: 13, name: "Toga T-Shirt", price: 10.99, image: "images/himiko_toga.png", category: "t-shirt" },
-    { id: 14, name: "MHA T-Shirt", price: 9.99, image: "images/himiko_toga.png", category: "t-shirt" },
-    { id: 15, name: "MHA Toga T-Shirt", price: 5.99, image: "images/himiko_toga.png", category: "t-shirt" },
-    { id: 16, name: "imi Toga T-Shirt", price: 8.99, image: "images/himiko_toga.png", category: "t-shirt" },
-    { id: 17, name: "ko Toga T-Shirt", price: 12.99, image: "images/himiko_toga.png", category: "t-shirt" },
-    { id: 18, name: "H Toga T-Shirt", price: 9.99, image: "images/himiko_toga.png", category: "t-shirt" },
-    { id: 19, name: "My Toga T-Shirt", price: 6.99, image: "images/himiko_toga.png", category: "t-shirt" },
-    { id: 20, name: "My hero Toga T-Shirt", price: 5.99, image: "images/himiko_toga.png", category: "t-shirt" },
-    { id: 21, name: "White Toga T-Shirt", price: 10.99, image: "images/himiko_toga.png", category: "t-shirt" },
-    { id: 22, name: "mha Toga T-Shirt", price: 17.99, image: "images/himiko_toga.png", category: "t-shirt" },
-    // Add more products...
-];
-
+let products = [];
 const cart = [];
+
+// Fetch products from JSON file
+fetch('products.json')
+    .then(response => response.json())
+    .then(data => {
+        products = data.products;
+        filterProducts();
+    })
+    .catch(error => console.error('Error loading products:', error));
 
 function filterProducts() {
     const searchTerm = document.getElementById('search').value.toLowerCase();
