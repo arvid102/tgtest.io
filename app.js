@@ -251,8 +251,19 @@ function updateCart() {
 
 tg.MainButton.onClick(() => {
     console.log("Place Order button clicked");
-    console.log("Cart contents:", JSON.stringify(cart));
-    tg.sendData(JSON.stringify(cart));
+    const orderData = {
+        items: cart.map(item => ({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity,
+            color: item.color,
+            size: item.size
+        })),
+        total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
+    };
+    console.log("Sending order data:", JSON.stringify(orderData));
+    tg.sendData(JSON.stringify(orderData));
 });
 
 // Initial render
