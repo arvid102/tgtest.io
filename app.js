@@ -262,8 +262,7 @@ tg.MainButton.onClick(() => {
         total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
     };
 
-    // Send order data to your Python server
-    fetch('https://my-python-bot-4a216cbe4847.herokuapp.com/create-invoice', {
+    fetch('https://https://my-python-bot-4a216cbe4847.herokuapp.com/create-invoice', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -273,7 +272,6 @@ tg.MainButton.onClick(() => {
     .then(response => response.json())
     .then(data => {
         if (data.invoiceUrl) {
-            // Open the invoice URL using Telegram's openInvoice method
             tg.openInvoice(data.invoiceUrl);
         } else {
             console.error('Failed to create invoice');
