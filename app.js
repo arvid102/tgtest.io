@@ -250,9 +250,9 @@ function updateCart() {
 }
 
 tg.MainButton.onClick(() => {
-  const stripe = Stripe('your_stripe_public_key');
+  const stripe = Stripe('pk_live_51P2AXXCT9S5PK8boaCx0ocueyqpDnOhAQH9TJWan7rFMlagOF6OWxQp6UIJ0vFzlwhYXWslxTw5VuYSvsft76iQ900CZYEAtt4');
 
-  fetch('https://your-backend.com/create-checkout-session', {
+  fetch('https://https://arvid102.github.io/tgtest.io/create-checkout-session', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
