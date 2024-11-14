@@ -4,7 +4,7 @@ const stripe = Stripe('your_stripe_public_key');
 // Функция для получения текущего URL бэкенда
 async function getBackendUrl() {
     try {
-        const response = await fetch('https://api.github.com/repos/YOUR_USERNAME/YOUR_REPO/contents/backend-url.json');
+        const response = await fetch('https://api.github.com/repos/arvid102/tgtest.io/contents/backend-url.json');
         const data = await response.json();
         const content = atob(data.content);
         return JSON.parse(content).url;
