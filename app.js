@@ -1,3 +1,62 @@
+// В начале app.js добавьте:
+const stripe = Stripe('your_stripe_public_key');
+
+// Функция для получения текущего URL бэкенда
+async function getBackendUrl() {
+    try {
+        const response = await fetch('https://api.github.com/repos/YOUR_USERNAME/YOUR_REPO/contents/backend-url.json');
+        const data = await response.json();
+        const content = atob(data.content);
+        return JSON.parse(content).url;
+    } catch (error) {
+        console.error('Error fetching backend URL:', error);
+        return null;
+    }
+}
+
+// Обновите обработчик кнопки заказа:
+tg.MainButton.onClick(async () => {
+    const backendUrl = await getBackendUrl();
+    if (!backendUrl) {
+        alert('Cannot connect to backend. Please try again later.');
+        return;
+    }
+
+    const orderData = {
+        items: cart.map(item => ({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity,
+            color: item.color,
+            size: item.size
+        })),
+        total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
+    };
+
+    try {
+        const response = await fetch(`${backendUrl}/create-checkout`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(orderData),
+        });
+
+        const data = await response.json();
+        
+        if (data.status === 'success' && data.sessionId) {
+            await stripe.redirectToCheckout({ sessionId: data.sessionId });
+        } else {
+            console.error('Failed to create checkout session:', data.message);
+            alert('Failed to create checkout session. Please try again.');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again.');
+    }
+});
+
 let tg = window.Telegram.WebApp;
 
 tg.expand();
