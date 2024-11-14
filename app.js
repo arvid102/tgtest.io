@@ -1,5 +1,24 @@
 // В начале app.js добавьте:
-const stripe = Stripe('your_stripe_public_key');
+async function getStripePublicKey() {
+  try {
+    const response = await fetch('https://api.github.com/repos/YOUR_USERNAME/YOUR_REPO/contents/stripe-public-key.json');
+    const data = await response.json();
+    const content = atob(data.content);
+    return JSON.parse(content).key;
+  } catch (error) {
+    console.error('Error fetching Stripe public key:', error);
+    return null;
+  }
+}
+
+let stripePublicKey;
+
+getStripePublicKey().then(key => {
+  stripePublicKey = key;
+  const stripe = Stripe(stripePublicKey);
+
+  // Остальной код, использующий stripePublicKey и stripe объект
+});
 
 // Функция для получения текущего URL бэкенда
 async function getBackendUrl() {
