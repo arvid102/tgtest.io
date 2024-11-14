@@ -267,7 +267,7 @@ function updateCart() {
 }
 
 tg.MainButton.onClick(async () => {
-    const backendUrl = 'https://your-ngrok-url.ngrok.io';
+    const backendUrl = 'https://ce1f-2a03-ec00-b9a9-1099-a5c0-58dd-5878-631.ngrok-free.app';
 
     const orderData = {
       items: cart.map(item => ({
