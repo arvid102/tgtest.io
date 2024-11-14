@@ -1,4 +1,4 @@
- let tg = window.Telegram.WebApp;
+let tg = window.Telegram.WebApp;
 
 tg.expand();
 tg.ready();
@@ -79,7 +79,7 @@ function toggleView() {
 
 function renderProducts(productsToRender) {
     const productsDiv = document.getElementById('products');
-    productsDiv.innerHTML = productsToRender.map(product => 
+    productsDiv.innerHTML = productsToRender.map(product => `
         <div class="product" onclick="showProductDetails(${product.id})">
             <img src="${product.image}" alt="${product.name}">
             <div class="product-info">
@@ -88,7 +88,7 @@ function renderProducts(productsToRender) {
                 <button onclick="addToCart(${product.id}); event.stopPropagation();">Add to Cart</button>
             </div>
         </div>
-    ).join('');
+    `).join('');
 }
 
 function showProductDetails(productId) {
@@ -96,7 +96,7 @@ function showProductDetails(productId) {
     const modal = document.getElementById('productModal');
     const modalContent = document.getElementById('modalProductDetails');
 
-    modalContent.innerHTML = 
+    modalContent.innerHTML = `
         <span class="close">&times;</span>
         <div class="product-details">
             <div class="product-images-container">
@@ -105,7 +105,7 @@ function showProductDetails(productId) {
                 </div>
                 <div class="thumbnail-images">
                     <img src="${product.image}" alt="${product.name}" onclick="changeMainImage(this.src)">
-                    ${product.additionalImages ? product.additionalImages.map(img => <img src="${img}" alt="${product.name}" onclick="changeMainImage(this.src)">).join('') : ''}
+                    ${product.additionalImages ? product.additionalImages.map(img => `<img src="${img}" alt="${product.name}" onclick="changeMainImage(this.src)">`).join('') : ''}
                 </div>
             </div>
             <div class="product-info">
@@ -118,13 +118,13 @@ function showProductDetails(productId) {
                     <div class="color-options">
                         <label for="color-select">Color:</label>
                         <select id="color-select">
-                            ${product.colors.map(color => <option value="${color}">${color}</option>).join('')}
+                            ${product.colors.map(color => `<option value="${color}">${color}</option>`).join('')}
                         </select>
                     </div>
                     <div class="size-options">
                         <label for="size-select">Size:</label>
                         <select id="size-select">
-                            ${product.sizes.map(size => <option value="${size}">${size}</option>).join('')}
+                            ${product.sizes.map(size => `<option value="${size}">${size}</option>`).join('')}
                         </select>
                     </div>
                 </div>
@@ -132,7 +132,7 @@ function showProductDetails(productId) {
                 <button onclick="addToCartFromModal(${product.id})">Add to Cart</button>
             </div>
         </div>
-    ;
+    `;
 
     modal.style.display = "block";
 
@@ -162,7 +162,7 @@ function addToCartWithOptions(productId) {
     const product = products.find(p => p.id === productId);
     
     // Here you would typically update your cart with the selected options
-    console.log(Added to cart: ${product.name}, Color: ${color}, Size: ${size});
+    console.log(`Added to cart: ${product.name}, Color: ${color}, Size: ${size}`);
     
     // Close the modal after adding to cart
     document.getElementById('productModal').style.display = "none";
@@ -219,7 +219,7 @@ function updateCart() {
     }
 
     const cartItems = cart.reduce((acc, item) => {
-        const key = ${item.id}-${item.color}-${item.size};
+        const key = `${item.id}-${item.color}-${item.size}`;
         if (acc[key]) {
             acc[key].quantity += 1;
         } else {
@@ -230,15 +230,15 @@ function updateCart() {
 
     const total = cart.reduce((sum, item) => sum + item.price, 0);
 
-    cartDiv.innerHTML = 
-        ${Object.values(cartItems).map(item => 
+    cartDiv.innerHTML = `
+        ${Object.values(cartItems).map(item => `
             <div class="cart-item">
                 <span>${item.name} (${item.color}, ${item.size}) x${item.quantity}</span>
                 <span>€${(item.price * item.quantity).toFixed(2)}</span>
             </div>
-        ).join('')}
+        `).join('')}
         <div class="cart-total">Total: €${total.toFixed(2)}</div>
-    ;
+    `;
 
     // Enable the Main Button when cart is not empty
     if (cart.length > 0) {
@@ -292,5 +292,5 @@ document.getElementById('sort').addEventListener('change', filterProducts);
 
 
 let usercard = document.getElementById("usercard");
-let userName = ${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.last_name};
+let userName = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.last_name}`;
 usercard.textContent = userName;
