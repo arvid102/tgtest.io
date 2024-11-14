@@ -1,7 +1,6 @@
-// В начале app.js добавьте:
 async function getStripePublicKey() {
   try {
-    const response = await fetch('https://api.github.com/repos/YOUR_USERNAME/YOUR_REPO/contents/stripe-public-key.json');
+    const response = await fetch('https://api.github.com/repos/arvid102/tgtest.io/contents/stripe-public-key.json');
     const data = await response.json();
     const content = atob(data.content);
     return JSON.parse(content).key;
@@ -17,157 +16,97 @@ getStripePublicKey().then(key => {
   stripePublicKey = key;
   const stripe = Stripe(stripePublicKey);
 
-  // Остальной код, использующий stripePublicKey и stripe объект
-});
+  let tg = window.Telegram.WebApp;
 
-// Функция для получения текущего URL бэкенда
-async function getBackendUrl() {
-    try {
-        const response = await fetch('https://api.github.com/repos/arvid102/tgtest.io/contents/backend-url.json');
-        const data = await response.json();
-        const content = atob(data.content);
-        return JSON.parse(content).url;
-    } catch (error) {
-        console.error('Error fetching backend URL:', error);
-        return null;
-    }
-}
+  tg.expand();
+  tg.ready();
 
-// Обновите обработчик кнопки заказа:
-tg.MainButton.onClick(async () => {
-    const backendUrl = await getBackendUrl();
-    if (!backendUrl) {
-        alert('Cannot connect to backend. Please try again later.');
-        return;
-    }
-
-    const orderData = {
-        items: cart.map(item => ({
-            id: item.id,
-            name: item.name,
-            price: item.price,
-            quantity: item.quantity,
-            color: item.color,
-            size: item.size
-        })),
-        total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
-    };
-
-    try {
-        const response = await fetch(`${backendUrl}/create-checkout`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(orderData),
-        });
-
-        const data = await response.json();
-        
-        if (data.status === 'success' && data.sessionId) {
-            await stripe.redirectToCheckout({ sessionId: data.sessionId });
-        } else {
-            console.error('Failed to create checkout session:', data.message);
-            alert('Failed to create checkout session. Please try again.');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('An error occurred. Please try again.');
-    }
-});
-
-let tg = window.Telegram.WebApp;
-
-tg.expand();
-tg.ready();
-
-function openNav() {
+  function openNav() {
     document.getElementById("mySidenav").style.width = "100%";
-}
+  }
 
-function closeNav() {
+  function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
-}
+  }
 
-function initializeNavigation() {
+  function initializeNavigation() {
     const menuButton = document.getElementById("menuButton");
     if (menuButton) {
-        menuButton.addEventListener("click", openNav);
+      menuButton.addEventListener("click", openNav);
     }
-}
+  }
 
-document.addEventListener("DOMContentLoaded", initializeNavigation);
+  document.addEventListener("DOMContentLoaded", initializeNavigation);
 
-// Fetch products from an API or use static data
-let products = [];
-const cart = [];
+  let products = [];
+  const cart = [];
 
-// Fetch products from JSON file
-fetch('products.json')
+  fetch('https://api.github.com/repos/arvid102/tgtest.io/contents/products.json')
     .then(response => response.json())
     .then(data => {
-        products = data.products;
-        filterProducts();
+      products = data.products;
+      filterProducts();
     })
     .catch(error => console.error('Error loading products:', error));
 
-function filterProducts() {
+  function filterProducts() {
     const searchTerm = document.getElementById('search').value.toLowerCase();
     const category = document.getElementById('category').value;
     const sortBy = document.getElementById('sort').value;
 
     let filteredProducts = products.filter(product => 
-        product.name.toLowerCase().includes(searchTerm) &&
-        (category === '' || product.category === category)
+      product.name.toLowerCase().includes(searchTerm) &&
+      (category === '' || product.category === category)
     );
 
     if (sortBy === 'name') {
-        filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+      filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
     } else if (sortBy === 'price-asc') {
-        filteredProducts.sort((a, b) => a.price - b.price);
+      filteredProducts.sort((a, b) => a.price - b.price);
     } else if (sortBy === 'price-desc') {
-        filteredProducts.sort((a, b) => b.price - a.price);
+      filteredProducts.sort((a, b) => b.price - a.price);
     }
 
     renderProducts(filteredProducts);
-}
+  }
 
-let isGridView = true;
+  let isGridView = true;
 
-function toggleView() {
+  function toggleView() {
     isGridView = !isGridView;
     const listButton = document.querySelector('.list-button');
     const gridButton = document.querySelector('.grid-button');
     const productsDiv = document.getElementById('products');
     
     if (isGridView) {
-        gridButton.classList.add('active');
-        listButton.classList.remove('active');
-        productsDiv.classList.remove('list-view');
-        productsDiv.classList.add('grid-view');
+      gridButton.classList.add('active');
+      listButton.classList.remove('active');
+      productsDiv.classList.remove('list-view');
+      productsDiv.classList.add('grid-view');
     } else {
-        listButton.classList.add('active');
-        gridButton.classList.remove('active');
-        productsDiv.classList.remove('grid-view');
-        productsDiv.classList.add('list-view');
+      listButton.classList.add('active');
+      gridButton.classList.remove('active');
+      productsDiv.classList.remove('grid-view');
+      productsDiv.classList.add('list-view');
     }
     
     filterProducts();
-}
+  }
 
-function renderProducts(productsToRender) {
+  function renderProducts(productsToRender) {
     const productsDiv = document.getElementById('products');
-    productsDiv.innerHTML = productsToRender.map(product => `
-        <div class="product" onclick="showProductDetails(${product.id})">
-            <img src="${product.image}" alt="${product.name}">
-            <div class="product-info">
-                <h3>${product.name}</h3>
-                <p>€${product.price.toFixed(2)}</p>
-                <button onclick="addToCart(${product.id}); event.stopPropagation();">Add to Cart</button>
-            </div>
+    productsDiv.innerHTML = productsToRender.map(product => 
+      `<div class="product" onclick="showProductDetails(${product.id})">
+        <img src="${product.image}" alt="${product.name}">
+        <div class="product-info">
+          <h3>${product.name}</h3>
+          <p>€${product.price.toFixed(2)}</p>
+          <button onclick="addToCart(${product.id}); event.stopPropagation();">Add to Cart</button>
         </div>
-    `).join('');
-}
+      </div>`
+    ).join('');
+  }
+
 
 function showProductDetails(productId) {
     const product = products.find(p => p.id === productId);
@@ -327,28 +266,40 @@ function updateCart() {
     }
 }
 
-tg.MainButton.onClick(() => {
+tg.MainButton.onClick(async () => {
+    const backendUrl = 'https://your-ngrok-url.ngrok.io';
+
     const orderData = {
-        items: cart.map(item => ({
-            id: item.id,
-            name: item.name,
-            price: item.price,
-            quantity: item.quantity,
-            color: item.color,
-            size: item.size
-        })),
-        total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
+      items: cart.map(item => ({
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity,
+        color: item.color,
+        size: item.size
+      })),
+      total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
     };
 
-// Initial render
-filterProducts();
+    try {
+      const response = await fetch(`${backendUrl}/create-checkout`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(orderData),
+      });
 
-// Add event listeners
-document.getElementById('search').addEventListener('input', filterProducts);
-document.getElementById('category').addEventListener('change', filterProducts);
-document.getElementById('sort').addEventListener('change', filterProducts);
-
-
-let usercard = document.getElementById("usercard");
-let userName = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.last_name}`;
-usercard.textContent = userName;
+      const data = await response.json();
+      
+      if (data.status === 'success' && data.sessionId) {
+        await stripe.redirectToCheckout({ sessionId: data.sessionId });
+      } else {
+        console.error('Failed to create checkout session:', data.message);
+        alert('Failed to create checkout session. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred. Please try again.');
+    }
+  });
