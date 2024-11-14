@@ -309,53 +309,17 @@ function updateCart() {
 }
 
 tg.MainButton.onClick(() => {
-  const stripe = Stripe('your_stripe_public_key');
-
-  fetch('https://your-backend.com/create-checkout-session', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      items: cart.map(item => ({
-        id: item.id,
-        quantity: item.quantity,
-      })),
-      userId: tg.initDataUnsafe.user.id,
-    }),
-  })
-  .then(response => response.json())
-  .then(data => {
-    if (data.sessionId) {
-      return stripe.redirectToCheckout({ sessionId: data.sessionId });
-    } else {
-      console.error('Failed to create Stripe checkout session');
-    }
-  })
-  .catch((error) => {
-    console.error('Error:', error);
-  });
-});
-
-    fetch('https://https://my-python-bot-4a216cbe4847.herokuapp.com/create-invoice', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(orderData),
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.invoiceUrl) {
-            tg.openInvoice(data.invoiceUrl);
-        } else {
-            console.error('Failed to create invoice');
-        }
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
-});
+    const orderData = {
+        items: cart.map(item => ({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity,
+            color: item.color,
+            size: item.size
+        })),
+        total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
+    };
 
 // Initial render
 filterProducts();
